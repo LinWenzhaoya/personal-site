@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  body {
+    font-family: "Microsoft YaHei", "微软雅黑", "SimSun", sans-serif;
+    color: #222;
+    max-width: 794px;
+    margin: 0 auto;
+    padding: 30px 50px;
+    font-size: 12.5px;
+    line-height: 1.7;
+    background: #fff;
+  }
+
+  @media print {
+    @page {
+      size: A4;
+      margin: 10mm 12mm;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      max-width: 100%;
+      font-size: 11px;
+      line-height: 1.55;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .download-bar,
+    #uploadArea { display: none !important; }
+
+    .header { margin-bottom: 8px; padding-bottom: 8px; }
+    .name { font-size: 24px; letter-spacing: 8px; margin-bottom: 4px; }
+    .contact { font-size: 12px; }
+    .photo { width: 85px; height: 110px; }
+
+    .section-title {
+      background: #1a3a5c !important;
+      color: #fff !important;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+      margin: 8px 0 6px 0;
+      padding: 2px 10px;
+      font-size: 13px;
+    }
+
+    .edu-block { margin-bottom: 4px; }
+    .detail { margin: 0; }
+    .row-header { font-size: 12px; margin-bottom: 0; }
+    .module-title { margin: 5px 0 1px 0; font-size: 11px; }
+    .content-block p { margin: 1px 0; }
+    .exp-block { margin-bottom: 8px; }
+    .skill-section p { margin: 1px 0; }
+
+    /* 防截断 */
+    .edu-block,
+    .exp-block,
+    .content-block {
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+    .section-title,
+    .module-title,
+    .row-header {
+      break-after: avoid;
+      page-break-after: avoid;
+    }
+
+    a[href]:after { content: none !important; }
+  }
+
+  .download-bar {
+    text-align: center;
+    margin-bottom: 16px;
+    padding: 10px;
+    background: #f0f4f8;
+    border-radius: 6px;
+  }
+  .download-bar button {
+    background: #1a3a5c;
+    color: #fff;
+    border: none;
+    padding: 8px 24px;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  .download-bar button:hover { background: #254d73; }
+  .download-bar .tip { margin: 8px 0 0 0; font-size: 11.5px; color: #555; line-height: 1.6; text-align: left; max-width: 520px; margin-left: auto; margin-right: auto; }
+  .download-bar .tip b { color: #c0392b; }
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+    border-bottom: 2px solid #1a3a5c;
+    padding-bottom: 14px;
+  }
+  .header-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-right: 20px;
+  }
+  .name {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 10px;
+    color: #1a3a5c;
+    margin-bottom: 8px;
+  }
+  .contact { font-size: 13px; color: #444; letter-spacing: 1px; }
+  .contact a { color: #444; text-decoration: none; }
+  .photo {
+    width: 100px;
+    height: 130px;
+    object-fit: cover;
+    border: 1.5px solid #ccc;
+    flex-shrink: 0;
+  }
+
+  .section-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    background: #1a3a5c;
+    padding: 3px 12px;
+    margin: 16px 0 10px 0;
+    letter-spacing: 2px;
+  }
+  .edu-block { margin-bottom: 8px; }
+  .row-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-weight: 700;
+    font-size: 13px;
+    color: #1a3a5c;
+    margin-bottom: 1px;
+  }
+  .detail { color: #333; margin: 1px 0; }
+  .detail .label { font-weight: 700; }
+  .module-title {
+    font-weight: 700;
+    color: #1a3a5c;
+    margin: 8px 0 2px 0;
+    font-size: 12.5px;
+  }
+  .tag { font-weight: 700; color: #333; }
+  .content-block p { margin: 2px 0; }
+  .exp-block { margin-bottom: 14px; }
+  .skill-section p { margin: 3px 0; }
+</style>
+</head>
+<body>
+
+<div class="download-bar">
+  <button onclick="window.print()">打印 / 导出为 PDF</button>
+  <div class="tip">
+    导出步骤：Chrome → Ctrl+P（Mac: ⌘+P）→ 目标选「另存为PDF」<br>
+    → 边距选「<b>无</b>」或「自定义」<br>
+    → <b>取消勾选「页眉和页脚」</b>（去掉顶部日期和底部路径）<br>
+    → 勾选「背景图形」（保留深蓝色标题栏）
+  </div>
+</div>
+
+<div class="header">
+  <div class="header-left">
+    <div class="name">林 诗 剑</div>
+    <div class="contact">
+  <a href="tel:18039770150">18039770150</a> ｜ 
+  <a href="mailto:348708441@qq.com">348708441@qq.com</a>
+    </div>
+  </div>
+  <img class="photo" src="./photo.jpg" alt="证件照">
+</div>
+
+
+<div class="section-title">教育背景</div>
+
+<div class="edu-block">
+  <div class="row-header">
+    <span>西安交通大学（保研） - 应用经济学 - 硕士</span>
+    <span>2024.09 ~ 2027.06</span>
+  </div>
+  <div class="detail"><span class="label">【专业课程】</span>高级计量经济学，高级宏观经济学，国际贸易，国际金融学等</div>
+</div>
+
+<div class="edu-block">
+  <div class="row-header">
+    <span>吉林大学（985） - 市场营销 - 本科</span>
+    <span>2020.09 ~ 2024.06</span>
+  </div>
+  <div class="detail"><span class="label">【GPA】</span>90.3（专业前10%）</div>
+  <div class="detail"><span class="label">【主修课程】</span>概率论（99），微积分（98），线性代数（97），金融学（94）等</div>
+  <div class="detail"><span class="label">【辅修计算机专业】</span>GPA：89.1（专业前10%）</div>
+  <div class="detail"><span class="label">【辅修课程】</span>Python语言程序设计，C语言程序设计，算法设计与分析，数据结构，计算机网络技术等</div>
+</div>
+
+<div class="section-title">实习经验</div>
+
+<div class="row-header">
+  <span>百度 | 文心助手</span>
+  <span>AI产品经理实习生（MCP方向）</span>
+  <span>2025.10 ~ 2026.03</span>
+</div>
+
+  <div class="module-title">模块一：利用Claude Code创建MCP召回评估自动化skill</div>
+  <div class="content-block">
+    <p><span class="tag">【问题】</span>产品侧每周需例行评估MCP召回情况，由于存在众多MCP且每个MCP需评超过50个query，目前评估为纯手动流程——数百条query需逐一查看label页面并人工判断，效率极低。</p>
+    <p><span class="tag">【方案】</span>基于对MCP调用链路各阶段的理解，明确debug日志中各环节关键判别字段，设计自动化路径：批量获取debugkey → 自动抓取解析debug信息 → 输出结构化评估报告。向Claude Code明确各阶段判别逻辑，结合典型case校准边界条件，经2-3轮纠偏后判别逻辑达到100%正确，为提速评估效率，引入20线程高并发方案，整套流程沉淀为可复用skill。</p>
+    <p><span class="tag">【结果】</span>评估效率从手动逐条提升至500 query/min。</p>
+  </div>
+
+  <div class="module-title">模块二：利用Claude Code创建Query需求强度评估自动化skill</div>
+  <div class="content-block">
+    <p><span class="tag">【问题】</span>医疗MCP覆盖6个场景（挂号、找医生等），每条query需判断所属场景及需求强度以决定是否触发组件。团队已有人工标准和标注数据，但直接输入主流LLM评估效果均不理想。</p>
+    <p><span class="tag">【方案】</span>根因在于人工标准是面向人的自然语言描述，非AI可执行逻辑。核心方法：让Claude Code学习人工标准+数百条标注样本后，生成结构化"AI可执行版判别标准"；以100条样本实测，重点审查判别理由而非仅看对错，思路偏差时逐条纠偏，2-3轮迭代后标准完全对齐。</p>
+    <p><span class="tag">【结果】</span>产出覆盖6场景×3级需求强度的AI执行标准skill，判别准确度与人工完全对齐，部分case覆盖维度优于人工，省下大量外包人力做人工评判工作。</p>
+  </div>
+
+  <div class="module-title">模块三：MCP引入流程SOP</div>
+  <div class="content-block">
+    <p><span class="tag">【背景】</span>MCP从引入到上线涉及生态、助手、垂类业务方、策略等多团队协作，此前无标准化规范。本人经历购药MCP等多个MCP从0到1的完整引入，将流程沉淀为SOP。</p>
+    <p><span class="tag">【上线与下线标准】</span>上线侧：准确率≥90%方可审批，最低信心样本单MCP 50 query、看板级100 query。下线侧：在线准确率&lt;80%触发强制回滚；80%-90%限期1周优化，未达标则回滚；紧急下线覆盖调用成功率过低、时延过高、风控及公关风险等情形。</p>
+    <p><span class="tag">【例行评估】</span>建立持续监控体系：上线1周内完成准确率+端到端体验回归，重点场景周评估，整体看板双周/月评估。制定准召打分（0-3分四档）与GSB评估标准（对比有/无MCP回答质量差异）。</p>
+    <p><span class="tag">【结果】</span>输出MCP全生命周期管理SOP，涵盖上线/下线标准、审核流程、例行评估机制，被后续引入工作持续复用。</p>
+  </div>
+
+  <div class="module-title">模块四：反转实验</div>
+  <div class="content-block">
+    <p><span class="tag">【背景】</span>通过A/B实验量化MCP对用户体验的实际影响，为MCP保留/优化/下线提供数据依据。</p>
+    <p><span class="tag">【第一轮实验】</span>5%流量反转关闭全部在线MCP，净化分析将MCP分为三类：正向6个、无增益47个、负向17个。发现时延指标异常：关闭MCP理论应降低首token延迟约400ms，实测仅30ms。排查定位：反转开关置于Reader层，前序Pipeline（MCPRank、Planner、McpSkills）仍在运行，导致时延测量失真约13倍。</p>
+    <p><span class="tag">【第二轮优化】</span>设计双组实验：①Reader层开关（支持单MCP净化，衡量效果贡献）；②管线最前端开关（完全禁止MCP调用，捕捉全链路时延成本）。两个维度结合实现真实ROI判断。</p>
+    <p><span class="tag">【结果】</span>百度健康等6个MCP被验证为正向增益；发现并修正实验设计缺陷，推动双组方案落地。</p>
+  </div>
+</div>
+
+<div class="exp-block">
+  <div class="row-header">
+    <span>京东 | 养车连锁业务部</span>
+    <span>用增产品实习生</span>
+    <span>2024.11 ~ 2025.01</span>
+  </div>
+  <div class="content-block">
+    <p><span class="tag">【项目背景】</span>京东养车团队的拉新目标与京东plus团队的推进生活服务权益目标一致，京东养车可以通过plus活动高效获取高质量新用户，于是双方一拍即合，达成合作。</p>
+    <p><span class="tag">【权益发放策略设计】</span>活动的落地是在线下，因此需考虑门店产能的限制，若权益超发，门店无法承接超额流量，会极大损害用户体验。我们通过理解业务特性，使用逆向转化漏斗倒推活动所需转化率，并动态计算出每日应发放权益数，避免了超发问题，保证用户体验。</p>
+    <p><span class="tag">【AB测试验证活动价值】</span>项目上线后进行为期一周的AB测试，将20%京东用户划分为对照组，对照组用户无法看到plus会员积分兑换洗车权益活动。计算实验组和对照组日均新人数之差作为我们活动有效拉新人数，最后计算出项目绝对ROI值为4.25，验证拉新活动具有很大价值。</p>
+    <p><span class="tag">【项目成果】</span>活动日均有效拉新用户数高达2.03万，项目ROI绝对值为4.25，日均带来百万收益。</p>
+  </div>
+</div>
+
+<div class="section-title">个人技能与评价</div>
+
+<div class="skill-section">
+  <p><span class="tag">【技术基础】</span>本科辅修计算机专业，掌握Python、C++等编程语言；vibe coding经验丰富，Claude Code与OpenClaw深度用户；深入学习Transformer架构原理（精读Attention Is All You Need原文），了解RAG检索增强生成机制；深入拆解Claude Code、Codex、OpenClaw等AI产品的全链路机制与架构设计。</p>
+  <p><span class="tag">【AI思考与表达】</span>对AI技术与前沿动态保持强烈好奇心和独立思考习惯，持续跟进Hassabis、Ilya等AI领军人物的深度访谈与行业动态。将个人思考整理为科普文章发布于小红书（注意力机制如何影响AI回答、AI发展中的数据负反馈循环等），累计获得20w+浏览、1.3w+点赞、6000+收藏。</p>
+  <p><span class="tag">【英语水平】</span>英语六级597分、托福104分（前15%）、GRE 324分，具备良好的英语听说读写能力。</p>
+  <p><span class="tag">【个人特质】</span>ENTJ-A人格，自驱力强，具备强ownership意识，遇事主动沟通，积极寻求解决方法。</p>
+</div>
+
+</body>
+</html>
