@@ -54,9 +54,7 @@
     .exp-block { margin-bottom: 8px; }
     .skill-section p { margin: 1px 0; }
 
-    .edu-block,
-    .exp-block,
-    .content-block {
+    .edu-block {
       break-inside: avoid;
       page-break-inside: avoid;
     }
@@ -203,7 +201,7 @@
 <div class="exp-block">
   <div class="row-header">
     <span>Coding Agent Runtime 设计拆解与原型验证</span>
-    <span>2025.03</span>
+    <span>2026.03</span>
   </div>
   <div class="content-block">
     <p><span class="tag">【背景】</span>为深入理解 Coding Agent 的底层机制，系统研究了 Claude Code、Codex CLI、OpenClaw 三个不同定位的 agent 产品的 runtime 架构，提炼出核心设计差异：Claude Code 以注意力管理为核心追求模型推理能力的极致发挥，Codex CLI 以安全优先构建渐进式信任体系，OpenClaw 以会话治理和长期记忆支撑多渠道通用助手场景。在此基础上搭建了一个最小 Claude Code 风格的 agent 原型，通过 A/B 对比实验验证关键设计决策的合理性。</p>
