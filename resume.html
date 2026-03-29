@@ -54,7 +54,6 @@
     .exp-block { margin-bottom: 8px; }
     .skill-section p { margin: 1px 0; }
 
-    /* 防截断 */
     .edu-block,
     .exp-block,
     .content-block {
@@ -117,6 +116,8 @@
   }
   .contact { font-size: 13px; color: #444; letter-spacing: 1px; }
   .contact a { color: #444; text-decoration: none; }
+  .homepage { font-size: 13px; color: #444; letter-spacing: 1px; margin-top: 4px; }
+  .homepage a { color: #444; text-decoration: none; }
   .photo {
     width: 100px;
     height: 130px;
@@ -164,8 +165,11 @@
   <div class="header-left">
     <div class="name">林 诗 剑</div>
     <div class="contact">
-  <a href="tel:18039770150">18039770150</a> ｜ 
-  <a href="mailto:348708441@qq.com">348708441@qq.com</a>
+      <a href="tel:18039770150">18039770150</a> ｜ 
+      <a href="mailto:348708441@qq.com">348708441@qq.com</a>
+    </div>
+    <div class="homepage">
+      个人主页：<a href="https://linwenzhaoya.github.io/personal-site/">https://linwenzhaoya.github.io/personal-site/</a>
     </div>
   </div>
   <img class="photo" src="./photo.jpg" alt="证件照">
@@ -193,13 +197,30 @@
   <div class="detail"><span class="label">【辅修课程】</span>Python语言程序设计，C语言程序设计，算法设计与分析，数据结构，计算机网络技术等</div>
 </div>
 
+
+<div class="section-title">项目经历</div>
+
+<div class="exp-block">
+  <div class="row-header">
+    <span>Coding Agent Runtime 设计拆解与原型验证</span>
+    <span>2025.03</span>
+  </div>
+  <div class="content-block">
+    <p><span class="tag">【背景】</span>为深入理解 Coding Agent 的底层机制，系统研究了 Claude Code、Codex CLI、OpenClaw 三个不同定位的 agent 产品的 runtime 架构，提炼出核心设计差异：Claude Code 以注意力管理为核心追求模型推理能力的极致发挥，Codex CLI 以安全优先构建渐进式信任体系，OpenClaw 以会话治理和长期记忆支撑多渠道通用助手场景。在此基础上搭建了一个最小 Claude Code 风格的 agent 原型，通过 A/B 对比实验验证关键设计决策的合理性。</p>
+    <p><span class="tag">【方案】</span>原型包含完整的 Tool Loop、6 个工具（search_code、read_file、write_patch、run_command 等）、上下文压缩模块（ContextManager）和 trace 记录系统。构造了一个含 6 个文件的 workspace 并埋入跨文件 bug，设计了两组实验：实验一对比上下文压缩开启/关闭对 agent 行为的影响，实验二对比搜索工具过滤/不过滤对决策质量的影响。分别使用 moonshot-v1-8k 和 kimi-k2.5 两个不同能力的模型跑实验，每组各 3 次，通过 trace 分析行为差异。</p>
+    <p><span class="tag">【结果】</span>实验一验证了上下文治理的必要性：弱模型（moonshot-v1-8k）压缩开启时成功率 67%（平均 8 步），关闭时 0%（agent 陷入死循环）；换用强模型（kimi-k2.5）后 ON 组 3/3 全部成功，OFF 组仍出现模型幻觉现象，说明即使强模型也需要上下文治理来维持状态准确性。实验二使用 kimi-k2.5 模型观察到 filtered 组 3/3 成功，unfiltered 组 2/3 成功且出现 1 次信息过载引发的模型幻觉。两组实验共同指向一个产品级结论：模型能力和 harness 复杂度之间是跷跷板关系——Claude Code 的极简 harness 以强模型为前提，面向更广泛模型的框架需要在 harness 层做更重的过滤和引导来补偿。</p>
+  </div>
+</div>
+
+
 <div class="section-title">实习经验</div>
 
-<div class="row-header">
-  <span>百度 | 文心助手</span>
-  <span>AI产品经理实习生（MCP方向）</span>
-  <span>2025.10 ~ 2026.03</span>
-</div>
+<div class="exp-block">
+  <div class="row-header">
+    <span>百度 | 文心助手</span>
+    <span>AI产品经理实习生（MCP方向）</span>
+    <span>2025.10 ~ 2026.03</span>
+  </div>
 
   <div class="module-title">模块一：利用Claude Code创建MCP召回评估自动化skill</div>
   <div class="content-block">
