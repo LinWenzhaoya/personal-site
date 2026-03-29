@@ -206,7 +206,7 @@
   <div class="content-block">
     <p><span class="tag">【背景】</span>为深入理解 Coding Agent 的底层机制，系统研究了 Claude Code、Codex CLI、OpenClaw 三个不同定位的 agent 产品的 runtime 架构，提炼出核心设计差异：Claude Code 以注意力管理为核心追求模型推理能力的极致发挥，Codex CLI 以安全优先构建渐进式信任体系，OpenClaw 以会话治理和长期记忆支撑多渠道通用助手场景。在此基础上搭建了一个最小 Claude Code 风格的 agent 原型，通过 A/B 对比实验验证关键设计决策的合理性。</p>
     <p><span class="tag">【方案】</span>原型包含完整的 Tool Loop、6 个工具（search_code、read_file、write_patch、run_command 等）、上下文压缩模块（ContextManager）和 trace 记录系统。构造了一个含 6 个文件的 workspace 并埋入跨文件 bug，设计了两组实验：实验一对比上下文压缩开启/关闭对 agent 行为的影响，实验二对比搜索工具过滤/不过滤对决策质量的影响。分别使用 moonshot-v1-8k 和 kimi-k2.5 两个不同能力的模型跑实验，每组各 3 次，通过 trace 分析行为差异。</p>
-    <p><span class="tag">【结果】</span>实验一验证了上下文治理的必要性：弱模型（moonshot-v1-8k）压缩开启时成功率 67%（平均 8 步），关闭时 0%（agent 陷入死循环）；换用强模型（kimi-k2.5）后 ON 组 3/3 全部成功，OFF 组仍出现模型幻觉现象，说明即使强模型也需要上下文治理来维持状态准确性。实验二使用 kimi-k2.5 模型观察到 filtered 组 3/3 成功，unfiltered 组 2/3 成功且出现 1 次信息过载引发的模型幻觉。两组实验共同指向一个产品级结论：模型能力和 harness 复杂度之间是跷跷板关系——Claude Code 的极简 harness 以强模型为前提，面向更广泛模型的框架需要在 harness 层做更重的过滤和引导来补偿。</p>
+    <p><span class="tag">【结果】</span>实验一验证了上下文治理的必要性：弱模型压缩开启时成功率 67%（平均 8 步），关闭时 0%（agent 陷入死循环重复同一失败操作）；强模型 ON 组 3/3 成功，OFF 组仍出现模型幻觉。实验二发现模型能力和 harness 设计的分层关系：弱模型两组均卡在 write_patch 基础能力瓶颈上（成功率均 1/3），搜索过滤的价值尚未体现；强模型解决基础能力问题后差异显现——filtered 组 3/3 成功，unfiltered 组出现 1 次信息过载引发的幻觉（38K chars 涌入后模型声称已修复但实际未执行任何操作）。两组实验共同指向：模型能力和 harness 复杂度是跷跷板关系，harness 设计需根据模型能力分层——先保证基础工具可用性，再优化信息过滤策略。</p>
   </div>
 </div>
 
