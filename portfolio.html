@@ -23,10 +23,8 @@
       --shadow-md: 0 4px 16px rgba(0,0,0,0.07);
       --radius: 14px;
     }
-
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-
     body {
       font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
       background: var(--bg-page);
@@ -36,434 +34,250 @@
     }
 
     .page-bg {
-      position: fixed;
-      top: 0; left: 0;
+      position: fixed; top: 0; left: 0;
       width: 100%; height: 100%;
-      pointer-events: none;
-      z-index: 0;
-      overflow: hidden;
+      pointer-events: none; z-index: 0; overflow: hidden;
     }
     .page-bg::before {
-      content: '';
-      position: absolute;
+      content: ''; position: absolute;
       top: -100px; right: -60px;
-      width: 420px; height: 420px;
-      border-radius: 50%;
+      width: 420px; height: 420px; border-radius: 50%;
       background: radial-gradient(circle, var(--primary-subtle) 0%, transparent 70%);
-      opacity: 0.4;
-      animation: floatBlob 20s ease-in-out infinite;
+      opacity: 0.4; animation: floatBlob 20s ease-in-out infinite;
     }
     .page-bg::after {
-      content: '';
-      position: absolute;
+      content: ''; position: absolute;
       bottom: -80px; left: -80px;
-      width: 340px; height: 340px;
-      border-radius: 50%;
+      width: 340px; height: 340px; border-radius: 50%;
       background: radial-gradient(circle, #e0e7ff 0%, transparent 70%);
-      opacity: 0.35;
-      animation: floatBlob 24s ease-in-out infinite reverse;
+      opacity: 0.35; animation: floatBlob 24s ease-in-out infinite reverse;
     }
     @keyframes floatBlob {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      33% { transform: translate(30px, -20px) scale(1.05); }
-      66% { transform: translate(-20px, 15px) scale(0.95); }
+      0%, 100% { transform: translate(0,0) scale(1); }
+      33% { transform: translate(30px,-20px) scale(1.05); }
+      66% { transform: translate(-20px,15px) scale(0.95); }
     }
 
     .container {
-      position: relative;
-      z-index: 1;
-      max-width: 880px;
-      margin: 0 auto;
-      padding: 48px 28px 40px;
+      position: relative; z-index: 1;
+      max-width: 880px; margin: 0 auto; padding: 48px 28px 40px;
     }
 
-    /* Back Link */
     .back-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      color: var(--text-light);
-      text-decoration: none;
-      font-size: 14px;
-      margin-bottom: 32px;
-      transition: color 0.2s;
+      display: inline-flex; align-items: center; gap: 6px;
+      color: var(--text-light); text-decoration: none; font-size: 14px;
+      margin-bottom: 32px; transition: color 0.2s;
     }
     .back-link:hover { color: var(--primary); }
     .back-link svg { width: 16px; height: 16px; }
 
-    /* Fade-in */
     .fade-in {
-      opacity: 0;
-      transform: translateY(28px);
+      opacity: 0; transform: translateY(28px);
       transition: opacity 0.65s ease, transform 0.65s ease;
     }
-    .fade-in.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
 
-    /* Page Hero */
-    .page-hero {
-      text-align: center;
-      margin-bottom: 56px;
-    }
+    .page-hero { text-align: center; margin-bottom: 56px; }
     .page-hero h1 {
       font-family: 'Noto Serif SC', serif;
-      font-size: 38px;
-      font-weight: 700;
-      letter-spacing: 3px;
-      margin-bottom: 12px;
+      font-size: 38px; font-weight: 700; letter-spacing: 3px; margin-bottom: 12px;
     }
     .page-hero .subtitle {
-      font-size: 16px;
-      color: var(--text-secondary);
-      max-width: 520px;
-      margin: 0 auto;
-      line-height: 1.8;
+      font-size: 16px; color: var(--text-secondary);
+      max-width: 520px; margin: 0 auto; line-height: 1.8;
     }
     .page-hero .divider {
-      width: 48px;
-      height: 3px;
+      width: 48px; height: 3px;
       background: linear-gradient(90deg, var(--primary), var(--primary-light));
-      border-radius: 2px;
-      margin: 20px auto 0;
+      border-radius: 2px; margin: 20px auto 0;
     }
 
-    /* Project Section */
-    .project-section {
-      margin-bottom: 56px;
-    }
+    .project-section { margin-bottom: 56px; }
 
-    /* Project Header Card */
     .project-header {
-      background: var(--bg-card);
-      border-radius: var(--radius);
-      padding: 28px 32px;
-      box-shadow: var(--shadow-sm);
-      border: 1px solid #e2e8f0;
-      margin-bottom: 18px;
+      background: var(--bg-card); border-radius: var(--radius);
+      padding: 28px 32px; box-shadow: var(--shadow-sm);
+      border: 1px solid #e2e8f0; margin-bottom: 18px;
     }
     .project-number {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--primary);
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      margin-bottom: 8px;
+      font-size: 12px; font-weight: 600; color: var(--primary);
+      text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px;
     }
     .project-header h2 {
       font-family: 'Noto Serif SC', serif;
-      font-size: 24px;
-      font-weight: 700;
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
+      font-size: 24px; font-weight: 700; margin-bottom: 10px;
+      display: flex; align-items: center; gap: 10px;
     }
     .project-header h2::before {
-      content: '';
-      width: 4px;
-      height: 24px;
-      background: var(--primary);
-      border-radius: 2px;
-      flex-shrink: 0;
+      content: ''; width: 4px; height: 24px;
+      background: var(--primary); border-radius: 2px; flex-shrink: 0;
     }
     .project-oneliner {
-      font-size: 14.5px;
-      color: var(--text-secondary);
-      line-height: 1.7;
-      margin-bottom: 16px;
+      font-size: 14.5px; color: var(--text-secondary);
+      line-height: 1.7; margin-bottom: 16px;
     }
-    .tech-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 16px;
-    }
+    .tech-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
     .tech-tag {
-      background: var(--primary-bg);
-      color: var(--primary);
-      font-size: 12.5px;
-      font-weight: 500;
-      padding: 4px 12px;
-      border-radius: 16px;
-      border: 1px solid var(--primary-subtle);
-      transition: all 0.2s ease;
-      cursor: default;
+      background: var(--primary-bg); color: var(--primary);
+      font-size: 12.5px; font-weight: 500; padding: 4px 12px;
+      border-radius: 16px; border: 1px solid var(--primary-subtle);
+      transition: all 0.2s ease; cursor: default;
     }
-    .tech-tag:hover {
-      background: var(--primary);
-      color: white;
-    }
+    .tech-tag:hover { background: var(--primary); color: white; }
 
-    /* GitHub Button */
-    .project-actions {
-      display: flex;
-      gap: 12px;
-    }
+    .project-actions { display: flex; gap: 12px; }
     .github-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 20px;
-      border-radius: 10px;
-      background: var(--text-main);
-      color: white;
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 500;
-      transition: all 0.25s ease;
-      border: 1px solid var(--text-main);
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 20px; border-radius: 10px;
+      background: var(--text-main); color: white; text-decoration: none;
+      font-size: 14px; font-weight: 500;
+      transition: all 0.25s ease; border: 1px solid var(--text-main);
     }
     .github-btn:hover {
-      background: #000;
-      transform: translateY(-2px);
+      background: #000; transform: translateY(-2px);
       box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     }
     .github-btn svg { width: 18px; height: 18px; }
 
-    /* Article Body Card */
     .article-body {
-      background: var(--bg-card);
-      border-radius: var(--radius);
-      padding: 36px 36px;
-      box-shadow: var(--shadow-sm);
+      background: var(--bg-card); border-radius: var(--radius);
+      padding: 36px 36px; box-shadow: var(--shadow-sm);
       border: 1px solid #e2e8f0;
     }
-
-    /* Section Title inside article */
     .section-title {
       font-family: 'Noto Serif SC', serif;
-      font-size: 20px;
-      font-weight: 700;
-      color: var(--text-main);
-      margin-top: 36px;
-      margin-bottom: 16px;
-      padding-left: 14px;
-      border-left: 3px solid var(--primary);
+      font-size: 20px; font-weight: 700; color: var(--text-main);
+      margin-top: 36px; margin-bottom: 16px;
+      padding-left: 14px; border-left: 3px solid var(--primary);
     }
-    .article-body .section-title:first-child {
-      margin-top: 0;
-    }
-
-    /* Sub-section title */
+    .article-body .section-title:first-child { margin-top: 0; }
     .sub-title {
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--text-main);
-      margin-top: 24px;
-      margin-bottom: 10px;
+      font-size: 16px; font-weight: 600; color: var(--text-main);
+      margin-top: 24px; margin-bottom: 10px;
     }
-
-    /* Label (问题/方案/结果 style) */
     .desc-label {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--primary);
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      margin-top: 24px;
-      margin-bottom: 6px;
+      font-size: 13px; font-weight: 600; color: var(--primary);
+      text-transform: uppercase; letter-spacing: 1.5px;
+      margin-top: 24px; margin-bottom: 6px;
     }
-
-    /* Paragraphs */
     .article-body p {
-      font-size: 14.5px;
-      color: var(--text-secondary);
-      line-height: 1.85;
-      margin-bottom: 14px;
+      font-size: 14.5px; color: var(--text-secondary);
+      line-height: 1.85; margin-bottom: 14px;
     }
-    .article-body p:last-child {
-      margin-bottom: 0;
-    }
-
-    /* Bold emphasis */
-    .article-body strong {
-      color: var(--text-main);
-      font-weight: 600;
-    }
-
-    /* Inline code */
+    .article-body p:last-child { margin-bottom: 0; }
+    .article-body strong { color: var(--text-main); font-weight: 600; }
     .article-body code {
-      background: var(--primary-bg);
-      color: var(--primary-dark);
-      font-size: 13px;
-      padding: 2px 7px;
-      border-radius: 5px;
+      background: var(--primary-bg); color: var(--primary-dark);
+      font-size: 13px; padding: 2px 7px; border-radius: 5px;
       font-family: 'SF Mono', 'Fira Code', monospace;
     }
-
-    /* Unordered list */
-    .article-body ul {
-      padding-left: 20px;
-      margin-bottom: 14px;
-    }
+    .article-body ul { padding-left: 20px; margin-bottom: 14px; }
     .article-body ul li {
-      font-size: 14.5px;
-      color: var(--text-secondary);
-      line-height: 1.85;
-      margin-bottom: 6px;
+      font-size: 14.5px; color: var(--text-secondary);
+      line-height: 1.85; margin-bottom: 6px;
     }
-    .article-body ul li strong {
-      color: var(--text-main);
-    }
+    .article-body ul li strong { color: var(--text-main); }
 
-    /* Image Figure */
+    /* Image Figure with loading states */
     .fig {
-      margin: 20px 0;
-      border-radius: 10px;
-      overflow: hidden;
-      background: #f1f5f9;
-      border: 1px solid #e2e8f0;
+      margin: 20px 0; border-radius: 10px; overflow: hidden;
+      background: #f1f5f9; border: 1px solid #e2e8f0;
+    }
+    .fig-img-wrapper {
+      position: relative; width: 100%; min-height: 120px;
+      background: linear-gradient(135deg, var(--primary-bg) 0%, #e0e7ff 100%);
+    }
+    .fig-img-wrapper::before {
+      content: '加载中…'; position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-light); font-size: 13px;
+      z-index: 1; pointer-events: none; transition: opacity 0.3s;
+    }
+    .fig-img-wrapper.loaded::before { opacity: 0; }
+    .fig-img-wrapper.error::before {
+      content: '图片加载失败，点击重试';
+      color: var(--text-secondary); cursor: pointer; pointer-events: auto;
     }
     .fig img {
-      width: 100%;
-      display: block;
+      width: 100%; display: block;
+      position: relative; z-index: 2;
+      opacity: 0; transition: opacity 0.4s ease;
     }
+    .fig-img-wrapper.loaded img { opacity: 1; }
     .fig-caption {
-      padding: 10px 16px;
-      font-size: 12.5px;
-      color: var(--text-light);
-      text-align: center;
-      background: #f8fafc;
-      border-top: 1px solid #e2e8f0;
+      padding: 10px 16px; font-size: 12.5px; color: var(--text-light);
+      text-align: center; background: #f8fafc; border-top: 1px solid #e2e8f0;
     }
 
-    /* Image group (for trace screenshots stacked) */
     .fig-group {
-      margin: 20px 0;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
+      margin: 20px 0; display: flex; flex-direction: column; gap: 12px;
     }
-    .fig-group .fig {
-      margin: 0;
-    }
+    .fig-group .fig { margin: 0; }
     .fig-group-label {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text-main);
-      margin-bottom: 4px;
+      font-size: 13px; font-weight: 600; color: var(--text-main); margin-bottom: 4px;
     }
 
-    /* HTML Table */
     .article-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 18px 0;
-      font-size: 13.5px;
+      width: 100%; border-collapse: collapse; margin: 18px 0; font-size: 13.5px;
     }
     .article-table th {
-      background: var(--primary-bg);
-      color: var(--primary-dark);
-      font-weight: 600;
-      padding: 10px 14px;
-      text-align: left;
-      border-bottom: 2px solid var(--primary-subtle);
-      white-space: nowrap;
+      background: var(--primary-bg); color: var(--primary-dark);
+      font-weight: 600; padding: 10px 14px; text-align: left;
+      border-bottom: 2px solid var(--primary-subtle); white-space: nowrap;
     }
     .article-table td {
-      padding: 9px 14px;
-      color: var(--text-secondary);
+      padding: 9px 14px; color: var(--text-secondary);
       border-bottom: 1px solid #e2e8f0;
     }
-    .article-table tr:last-child td {
-      border-bottom: none;
-    }
-    .article-table tbody tr:hover {
-      background: #f8fafc;
-    }
+    .article-table tr:last-child td { border-bottom: none; }
+    .article-table tbody tr:hover { background: #f8fafc; }
 
-    /* Section Divider */
     .section-divider {
-      width: 100%;
-      height: 1px;
-      background: #e2e8f0;
-      margin: 0 0 56px;
-      position: relative;
+      width: 100%; height: 1px; background: #e2e8f0;
+      margin: 0 0 56px; position: relative;
     }
     .section-divider::after {
-      content: '✦';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: var(--bg-page);
-      padding: 0 16px;
-      color: var(--text-light);
-      font-size: 14px;
+      content: '✦'; position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
+      background: var(--bg-page); padding: 0 16px;
+      color: var(--text-light); font-size: 14px;
     }
 
-    /* Footer */
     .footer {
-      margin-top: 48px;
-      padding-top: 28px;
-      border-top: 1px solid #e2e8f0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 16px;
+      margin-top: 48px; padding-top: 28px; border-top: 1px solid #e2e8f0;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 16px;
     }
-    .footer-left {
-      color: var(--text-light);
-      font-size: 13px;
-    }
-    .footer-links {
-      display: flex;
-      gap: 18px;
-    }
+    .footer-left { color: var(--text-light); font-size: 13px; }
+    .footer-links { display: flex; gap: 18px; }
     .footer-links a {
-      color: var(--text-light);
-      text-decoration: none;
-      font-size: 13px;
+      color: var(--text-light); text-decoration: none; font-size: 13px;
       transition: color 0.2s;
     }
     .footer-links a:hover { color: var(--primary); }
 
-    /* Lightbox */
     .lightbox {
-      display: none;
-      position: fixed;
-      inset: 0;
-      z-index: 100;
+      display: none; position: fixed; inset: 0; z-index: 100;
       background: rgba(0,0,0,0.85);
-      align-items: center;
-      justify-content: center;
-      padding: 40px;
-      cursor: zoom-out;
-      animation: lbFadeIn 0.25s ease;
+      align-items: center; justify-content: center;
+      padding: 40px; cursor: zoom-out; animation: lbFadeIn 0.25s ease;
     }
     .lightbox.open { display: flex; }
-    @keyframes lbFadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
+    @keyframes lbFadeIn { from { opacity: 0; } to { opacity: 1; } }
     .lightbox img {
-      max-width: 90vw;
-      max-height: 85vh;
-      border-radius: 8px;
-      box-shadow: 0 8px 40px rgba(0,0,0,0.4);
-      cursor: default;
+      max-width: 90vw; max-height: 85vh; border-radius: 8px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.4); cursor: default;
     }
     .lightbox-close {
-      position: absolute;
-      top: 20px; right: 24px;
-      width: 40px; height: 40px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.15);
-      border: none;
-      color: white;
-      font-size: 22px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      position: absolute; top: 20px; right: 24px;
+      width: 40px; height: 40px; border-radius: 50%;
+      background: rgba(255,255,255,0.15); border: none; color: white;
+      font-size: 22px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
       transition: background 0.2s;
     }
     .lightbox-close:hover { background: rgba(255,255,255,0.3); }
 
-    /* Mobile */
     @media (max-width: 720px) {
       .container { padding: 32px 18px 28px; }
       .page-hero h1 { font-size: 28px; }
@@ -482,7 +296,6 @@
       .article-table { font-size: 12px; }
       .article-table th, .article-table td { padding: 7px 8px; }
     }
-
     @media (max-width: 480px) {
       .page-hero h1 { font-size: 24px; }
     }
@@ -493,13 +306,11 @@
 
   <div class="container">
 
-    <!-- Back -->
     <a class="back-link fade-in" href="./index.html">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
       返回主页
     </a>
 
-    <!-- Page Hero -->
     <section class="page-hero fade-in">
       <h1>作品集</h1>
       <p class="subtitle">我做过的项目、搭建的工具和探索过的方向。每个项目都是一次从0到1的完整实践。</p>
@@ -509,7 +320,6 @@
     <!-- ═══════ 项目一：Agent 实验 ═══════ -->
     <section class="project-section fade-in">
 
-      <!-- Header Card -->
       <div class="project-header">
         <div class="project-number">Project 01</div>
         <h2>Coding Agent Runtime 设计拆解与原型验证</h2>
@@ -520,21 +330,21 @@
           <span class="tech-tag">A/B Testing</span>
         </div>
         <div class="project-actions">
-          <a class="github-btn" href="https://github.com/LinWenzhaoya/claude-code-agent-" target="_blank" rel="noopener noreferrer">
+          <a class="github-btn" href="https://github.com/你的用户名/项目仓库" target="_blank" rel="noopener noreferrer">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
             查看源码
           </a>
         </div>
       </div>
 
-      <!-- Article Body -->
       <div class="article-body">
 
-        <!-- Agent 原型架构 -->
         <h3 class="section-title">Agent 原型架构</h3>
 
         <div class="fig">
-          <img src="./portfolio/p1-1.png" alt="Agent 原型架构图">
+          <div class="fig-img-wrapper">
+            <img src="./portfolio/p1-1.png" alt="Agent 原型架构图" loading="lazy">
+          </div>
           <div class="fig-caption">Agent 原型架构总览</div>
         </div>
 
@@ -550,7 +360,6 @@
         </ul>
         <p>Workspace 测试项目包含多个文件（config.py、db.py、utils.py、auth.py、services.py、routes.py、test_all.py），构成一个用户管理系统，其中埋有跨文件 bug 用于实验验证。</p>
 
-        <!-- 实验一 -->
         <h3 class="section-title">实验一：上下文治理对 agent 行为的影响</h3>
 
         <div class="desc-label">背景与目标</div>
@@ -563,7 +372,9 @@
         <div class="desc-label">实验结果</div>
 
         <div class="fig">
-          <img src="./portfolio/p1-2.png" alt="实验一 A/B 对比结果汇总">
+          <div class="fig-img-wrapper">
+            <img src="./portfolio/p1-2.png" alt="实验一 A/B 对比结果汇总" loading="lazy">
+          </div>
           <div class="fig-caption">实验一 A/B 对比结果汇总</div>
         </div>
 
@@ -572,28 +383,34 @@
 
         <div class="desc-label">Trace 对比</div>
 
-        <!-- OFF-3 traces -->
         <div class="fig-group">
           <div class="fig-group-label">OFF-3 的死循环 trace（20 步耗尽，完全陷入 write_patch 死循环）</div>
           <div class="fig">
-            <img src="./portfolio/p1-3.png" alt="OFF-3 trace 截图1">
+            <div class="fig-img-wrapper">
+              <img src="./portfolio/p1-3.png" alt="OFF-3 trace 截图1" loading="lazy">
+            </div>
             <div class="fig-caption">OFF-3 trace（上）</div>
           </div>
           <div class="fig">
-            <img src="./portfolio/p1-4.png" alt="OFF-3 trace 截图2">
+            <div class="fig-img-wrapper">
+              <img src="./portfolio/p1-4.png" alt="OFF-3 trace 截图2" loading="lazy">
+            </div>
             <div class="fig-caption">OFF-3 trace（下）</div>
           </div>
         </div>
 
-        <!-- ON-1 traces -->
         <div class="fig-group">
           <div class="fig-group-label">ON-1 成功的 trace（7 步干净利落完成任务）</div>
           <div class="fig">
-            <img src="./portfolio/p1-5.png" alt="ON-1 trace 截图1">
+            <div class="fig-img-wrapper">
+              <img src="./portfolio/p1-5.png" alt="ON-1 trace 截图1" loading="lazy">
+            </div>
             <div class="fig-caption">ON-1 trace（上）</div>
           </div>
           <div class="fig">
-            <img src="./portfolio/p1-6.png" alt="ON-1 trace 截图2">
+            <div class="fig-img-wrapper">
+              <img src="./portfolio/p1-6.png" alt="ON-1 trace 截图2" loading="lazy">
+            </div>
             <div class="fig-caption">ON-1 trace（下）</div>
           </div>
         </div>
@@ -602,7 +419,6 @@
         <p>OFF 组的死循环现象直接验证了核心判断。Agent 并非"看不到"之前的失败记录——这些记录确实在 messages 里。问题是 messages 不断膨胀，大量重复的失败记录稀释了有效信息的密度，模型的注意力被淹没，失去了"退一步换个策略"的能力。ON 组通过压缩清理了旧的、重复的信息，让模型在每一步都能聚焦于当前最关键的状态。</p>
         <p>同时，ON-3 的失败也说明了一个边界条件：<strong>上下文治理是必要条件但不是充分条件。</strong>如果模型一开始就走错了方向，压缩再好也无法纠正推理错误。Harness 负责创造条件让模型发挥，但不能替代模型自身的判断力。</p>
 
-        <!-- 实验二 -->
         <h3 class="section-title">实验二：工具过滤对 agent 决策质量的影响</h3>
 
         <div class="desc-label">背景与目标</div>
@@ -615,7 +431,9 @@
         <div class="sub-title">moonshot-v1-8k 结果</div>
 
         <div class="fig">
-          <img src="./portfolio/p1-7.png" alt="moonshot 实验二结果表格">
+          <div class="fig-img-wrapper">
+            <img src="./portfolio/p1-7.png" alt="moonshot 实验二结果表格" loading="lazy">
+          </div>
           <div class="fig-caption">moonshot-v1-8k 实验二结果汇总</div>
         </div>
 
@@ -624,7 +442,9 @@
         <div class="sub-title">kimi-k2.5 结果</div>
 
         <div class="fig">
-          <img src="./portfolio/p1-8.png" alt="kimi-k2.5 实验二结果表格">
+          <div class="fig-img-wrapper">
+            <img src="./portfolio/p1-8.png" alt="kimi-k2.5 实验二结果表格" loading="lazy">
+          </div>
           <div class="fig-caption">kimi-k2.5 实验二结果汇总</div>
         </div>
 
@@ -669,28 +489,34 @@
 
         <div class="desc-label">Trace 对比</div>
 
-        <!-- filtered traces -->
         <div class="fig-group">
           <div class="fig-group-label">kimi-k2.5 filtered 组 trace（稳定完成，步骤清晰）</div>
           <div class="fig">
-            <img src="./portfolio/p1-9.png" alt="filtered 组 trace 截图1">
+            <div class="fig-img-wrapper">
+              <img src="./portfolio/p1-9.png" alt="filtered 组 trace 截图1" loading="lazy">
+            </div>
             <div class="fig-caption">filtered 组 trace（上）</div>
           </div>
           <div class="fig">
-            <img src="./portfolio/p1-10.png" alt="filtered 组 trace 截图2">
+            <div class="fig-img-wrapper">
+              <img src="./portfolio/p1-10.png" alt="filtered 组 trace 截图2" loading="lazy">
+            </div>
             <div class="fig-caption">filtered 组 trace（下）</div>
           </div>
         </div>
 
-        <!-- unfiltered hallucination traces -->
         <div class="fig-group">
           <div class="fig-group-label">kimi-k2.5 unfiltered_run2 的幻觉 trace（信息过载后模型迷失）</div>
           <div class="fig">
-            <img src="./portfolio/p1-11.png" alt="unfiltered_run2 trace 截图1">
+            <div class="fig-img-wrapper">
+              <img src="./portfolio/p1-11.png" alt="unfiltered_run2 trace 截图1" loading="lazy">
+            </div>
             <div class="fig-caption">unfiltered_run2 幻觉 trace（上）</div>
           </div>
           <div class="fig">
-            <img src="./portfolio/p1-12.png" alt="unfiltered_run2 trace 截图2">
+            <div class="fig-img-wrapper">
+              <img src="./portfolio/p1-12.png" alt="unfiltered_run2 trace 截图2" loading="lazy">
+            </div>
             <div class="fig-caption">unfiltered_run2 幻觉 trace（下）</div>
           </div>
         </div>
@@ -700,7 +526,7 @@
         <p>但需要诚实地说明局限性：样本量较小（每组 3 次），kimi-k2.5 的幻觉只出现了 1 次，不能说"unfiltered 一定会导致幻觉"，只能说"增加了风险"。moonshot 两组都卡在 write_patch 的基础能力瓶颈上，搜索过滤的差异没有机会体现。</p>
         <p>结合两版实验和跨模型对比，一个更完整的认知浮现出来：<strong>模型能力和 harness 复杂度之间是跷跷板关系，而且影响体现在不同层面。</strong>弱模型的瓶颈在基础工具使用能力（write_patch 的 snippet 匹配），harness 层的信息过滤还排不上优先级。强模型解决了基础能力问题后，信息过滤的价值才开始显现——unfiltered 的信息过载会增加幻觉风险。这说明 harness 设计需要根据模型能力分层：先保证基础工具可用性，再优化信息过滤策略。Claude Code 之所以能用极简 harness，正是因为强模型已经跨过了基础能力门槛，harness 只需要在信息管理层做好工作就够了。</p>
 
-      </div><!-- /article-body -->
+      </div>
     </section>
 
     <div class="section-divider fade-in"></div>
@@ -708,7 +534,6 @@
     <!-- ═══════ 项目二：MCP 召回评估 ═══════ -->
     <section class="project-section fade-in">
 
-      <!-- Header Card -->
       <div class="project-header">
         <div class="project-number">Project 02</div>
         <h2>MCP 召回评估自动化</h2>
@@ -716,12 +541,10 @@
         <div class="tech-tags">
           <span class="tech-tag">Claude Code</span>
           <span class="tech-tag">MCP</span>
-          <span class="tech-tag">Python</span>
           <span class="tech-tag">Debug Analysis</span>
         </div>
       </div>
 
-      <!-- Article Body -->
       <div class="article-body">
 
         <h3 class="section-title">问题背景</h3>
@@ -729,19 +552,22 @@
         <p>策略侧已经有了自动剖析工具，但产品侧的召回评估仍然纯手动——每次拿到几百个 query，需要逐一打开网页、点击 debug 模块、查看 debugkey、人工判断召回情况。一轮评估耗时数小时。</p>
 
         <div class="fig">
-          <img src="./portfolio/p2-1.png" alt="手动流程截图">
+          <div class="fig-img-wrapper">
+            <img src="./portfolio/p2-1.png" alt="手动流程截图" loading="lazy">
+          </div>
           <div class="fig-caption">手动逐条查看 debug 的操作界面</div>
         </div>
 
         <h3 class="section-title">我的做法：逆向拆解 debug 日志，精确指导 AI 定位关键字段</h3>
         <p>一份 debug 日志记录了全链路所有阶段的完整信息，通常有 5-10 万行代码。直接让 AI 去"分析这份日志，告诉我 MCP 的调用和挂载情况"是行不通的——它会在海量字段中迷失，反复试错。</p>
-        <p>我的做法是通过自己对MCP链路的了解，精确告诉 AI 该关注哪些链路部分。最终定位到两个关键判定点：</p>
-
+        <p>我的做法是先自己通读 debug 日志，理解全链路各模块的输入输出关系，然后精确告诉 AI 该关注哪些字段、忽略哪些字段。最终定位到两个关键判定点：</p>
         <p><strong>判定点一：调用 MCP。</strong>对应 Tool Decision 阶段的输出，看 <code>step0_decision</code> 的 <code>status</code> 字段和最终汇总的 <code>server_names</code> 字段。这里有个关键细节——Planner 分配的 MCP 和实际调用的 MCP 可能不一致，比如 Planner 分配给了"购药"，但 Tool Decision 独立判断后调用的是"去问诊"。如果 AI 只看 Planner 的输出就会判断错误。</p>
         <p><strong>判定点二：挂载 MCP。</strong>判断 MCP 结果是否最终出现在用户看到的回答中。需要检查 Generator 输出的 <code>all_answer</code> 中是否存在 MCP 引用标记，同时还要检查是否有独立前端组件渲染（如医生卡片），因为 MCP 数据有文本引用和组件渲染两个通道。</p>
 
         <div class="fig">
-          <img src="./portfolio/p2-2.png" alt="MCP 全链路简图">
+          <div class="fig-img-wrapper">
+            <img src="./portfolio/p2-2.png" alt="MCP 全链路简图" loading="lazy">
+          </div>
           <div class="fig-caption">MCP 全链路简图，标注"调用 MCP"和"挂载 MCP"两个判定点</div>
         </div>
 
@@ -752,19 +578,22 @@
         <p>指导 Claude Code 写出一套可复用的 skill 体系后，批量分析效率实现质的飞跃：346 个 query，20 并发，21.5 秒内完成全部分析，输出结构化评估报告，直接可用于产品决策。相比之前手动逐条查看，效率提升约 600 倍。</p>
 
         <div class="fig">
-          <img src="./portfolio/p2-3.png" alt="运行结果截图">
+          <div class="fig-img-wrapper">
+            <img src="./portfolio/p2-3.png" alt="运行结果截图" loading="lazy">
+          </div>
           <div class="fig-caption">346 个 debugkey，并发数 20，耗时 21.5s</div>
         </div>
 
         <div class="fig">
-          <img src="./portfolio/p2-4.png" alt="结果汇总表格">
+          <div class="fig-img-wrapper">
+            <img src="./portfolio/p2-4.png" alt="结果汇总表格" loading="lazy">
+          </div>
           <div class="fig-caption">结构化评估报告汇总</div>
         </div>
 
-      </div><!-- /article-body -->
+      </div>
     </section>
 
-    <!-- Footer -->
     <footer class="footer fade-in">
       <div class="footer-left">© 2026 林诗剑 · 用好奇心驱动</div>
       <div class="footer-links">
@@ -782,6 +611,34 @@
   </div>
 
   <script>
+    // Image loading states
+    document.querySelectorAll('.fig-img-wrapper').forEach(wrapper => {
+      const img = wrapper.querySelector('img');
+
+      img.addEventListener('load', () => {
+        wrapper.classList.add('loaded');
+      });
+
+      img.addEventListener('error', () => {
+        wrapper.classList.add('error');
+      });
+
+      // Click to retry on error
+      wrapper.addEventListener('click', () => {
+        if (wrapper.classList.contains('error')) {
+          wrapper.classList.remove('error');
+          const src = img.src;
+          img.src = '';
+          img.src = src + (src.includes('?') ? '&' : '?') + 't=' + Date.now();
+        }
+      });
+
+      // If already cached
+      if (img.complete && img.naturalWidth > 0) {
+        wrapper.classList.add('loaded');
+      }
+    });
+
     // Lightbox
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = lightbox.querySelector('img');
@@ -789,27 +646,24 @@
     document.querySelectorAll('.fig img').forEach(img => {
       img.style.cursor = 'zoom-in';
       img.addEventListener('click', () => {
-        lightboxImg.src = img.src;
-        lightbox.classList.add('open');
+        if (img.closest('.fig-img-wrapper').classList.contains('loaded')) {
+          lightboxImg.src = img.src;
+          lightbox.classList.add('open');
+        }
       });
     });
 
     lightbox.addEventListener('click', e => {
-      if (e.target !== lightboxImg) {
-        lightbox.classList.remove('open');
-      }
+      if (e.target !== lightboxImg) lightbox.classList.remove('open');
     });
-
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape') lightbox.classList.remove('open');
     });
 
     // Scroll Fade-in
-    const observer = new IntersectionObserver((entries) => {
+    const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
+        if (entry.isIntersecting) entry.target.classList.add('visible');
       });
     }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
