@@ -227,14 +227,7 @@
     <p><span class="tag">【结果】</span>评估效率从手动逐条提升至500 query/min。</p>
   </div>
 
-  <div class="module-title">模块二：利用Claude Code创建Query需求强度评估自动化skill</div>
-  <div class="content-block">
-    <p><span class="tag">【问题】</span>医疗MCP覆盖6个场景（挂号、找医生等），每条query需判断所属场景及需求强度以决定是否触发组件。团队已有人工标准和标注数据，但直接输入主流LLM评估效果均不理想。</p>
-    <p><span class="tag">【方案】</span>根因在于人工标准是面向人的自然语言描述，非AI可执行逻辑。核心方法：让Claude Code学习人工标准+数百条标注样本后，生成结构化"AI可执行版判别标准"；以100条样本实测，重点审查判别理由而非仅看对错，思路偏差时逐条纠偏，2-3轮迭代后标准完全对齐。</p>
-    <p><span class="tag">【结果】</span>产出覆盖6场景×3级需求强度的AI执行标准skill，判别准确度与人工完全对齐，部分case覆盖维度优于人工，省下大量外包人力做人工评判工作。</p>
-  </div>
-
-  <div class="module-title">模块三：MCP引入流程SOP</div>
+  <div class="module-title">模块二：MCP引入流程SOP</div>
   <div class="content-block">
     <p><span class="tag">【背景】</span>MCP从引入到上线涉及生态、助手、垂类业务方、策略等多团队协作，此前无标准化规范。本人经历购药MCP等多个MCP从0到1的完整引入，将流程沉淀为SOP。</p>
     <p><span class="tag">【上线与下线标准】</span>上线侧：准确率≥90%方可审批，最低信心样本单MCP 50 query、看板级100 query。下线侧：在线准确率&lt;80%触发强制回滚；80%-90%限期1周优化，未达标则回滚；紧急下线覆盖调用成功率过低、时延过高、风控及公关风险等情形。</p>
@@ -242,7 +235,7 @@
     <p><span class="tag">【结果】</span>输出MCP全生命周期管理SOP，涵盖上线/下线标准、审核流程、例行评估机制，被后续引入工作持续复用。</p>
   </div>
 
-  <div class="module-title">模块四：反转实验</div>
+  <div class="module-title">模块三：反转实验</div>
   <div class="content-block">
     <p><span class="tag">【背景】</span>通过A/B实验量化MCP对用户体验的实际影响，为MCP保留/优化/下线提供数据依据。</p>
     <p><span class="tag">【第一轮实验】</span>5%流量反转关闭全部在线MCP，净化分析将MCP分为三类：正向6个、无增益47个、负向17个。发现时延指标异常：关闭MCP理论应降低首token延迟约400ms，实测仅30ms。排查定位：反转开关置于Reader层，前序Pipeline（MCPRank、Planner、McpSkills）仍在运行，导致时延测量失真约13倍。</p>
@@ -269,8 +262,8 @@
 
 <div class="skill-section">
   <p><span class="tag">【技术基础】</span>本科辅修计算机专业，掌握Python、C++等编程语言；vibe coding经验丰富，Claude Code与OpenClaw深度用户；学习过Transformer架构原理，以及Claude Code、Codex、OpenClaw等agent产品的全链路机制与架构设计。</p>
-  <p><span class="tag">【AI思考与表达】</span>对AI技术与前沿动态保持强烈好奇心和独立思考习惯，持续跟进Hassabis、Ilya等AI领军人物的深度访谈与行业动态。将个人思考整理为科普文章发布于小红书（注意力机制如何影响AI回答、AI发展中的数据负反馈循环等），累计获得25w+浏览、2.6w+点赞收藏。</p>
-  <p><span class="tag">【英语水平】</span>英语六级597分、托福104分（前15%）、GRE 324分，具备良好的英语听说读写能力。</p>
+  <p><span class="tag">【AI思考与表达】</span>对AI技术与前沿动态保持强烈好奇心和独立思考习惯，持续跟进Hassabis、Ilya等AI领军人物的深度访谈与行业动态。将个人思考整理为科普文章发布于小红书（注意力机制如何影响AI回答、AI发展中的数据负反馈循环等），累计获得30w+浏览、3w+点赞收藏。</p>
+  <p><span class="tag">【英语水平】</span>英语六级597分、托福104分、GRE 324分，具备良好的英语听说读写能力。</p>
   <p><span class="tag">【个人特质】</span>ENTJ-A人格，自驱力强，具备强ownership意识，遇事主动沟通，积极寻求解决方法。</p>
 </div>
 
