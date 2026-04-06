@@ -1,15 +1,12 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>林诗剑 | 作品集</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;600&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
       --primary: #2563eb;
@@ -22,22 +19,13 @@
       --text-light: #94a3b8;
       --bg-page: #f8fafc;
       --bg-card: #ffffff;
-      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
-      --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.07);
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 16px rgba(0,0,0,0.07);
       --radius: 14px;
-      --sidebar-width: 260px;
+      --sidebar-w: 260px;
     }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
       font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
       background: var(--bg-page);
@@ -46,831 +34,407 @@
       -webkit-font-smoothing: antialiased;
     }
 
+    /* ── Background blobs ── */
     .page-bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 0;
-      overflow: hidden;
+      position: fixed; top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none; z-index: 0; overflow: hidden;
     }
-
     .page-bg::before {
-      content: '';
-      position: absolute;
-      top: -100px;
-      right: -60px;
-      width: 420px;
-      height: 420px;
-      border-radius: 50%;
+      content: ''; position: absolute;
+      top: -100px; right: -60px;
+      width: 420px; height: 420px; border-radius: 50%;
       background: radial-gradient(circle, var(--primary-subtle) 0%, transparent 70%);
-      opacity: 0.4;
-      animation: floatBlob 20s ease-in-out infinite;
+      opacity: 0.4; animation: floatBlob 20s ease-in-out infinite;
     }
-
     .page-bg::after {
-      content: '';
-      position: absolute;
-      bottom: -80px;
-      left: -80px;
-      width: 340px;
-      height: 340px;
-      border-radius: 50%;
+      content: ''; position: absolute;
+      bottom: -80px; left: -80px;
+      width: 340px; height: 340px; border-radius: 50%;
       background: radial-gradient(circle, #e0e7ff 0%, transparent 70%);
-      opacity: 0.35;
-      animation: floatBlob 24s ease-in-out infinite reverse;
+      opacity: 0.35; animation: floatBlob 24s ease-in-out infinite reverse;
     }
-
     @keyframes floatBlob {
-
-      0%,
-      100% {
-        transform: translate(0, 0) scale(1);
-      }
-
-      33% {
-        transform: translate(30px, -20px) scale(1.05);
-      }
-
-      66% {
-        transform: translate(-20px, 15px) scale(0.95);
-      }
+      0%, 100% { transform: translate(0,0) scale(1); }
+      33% { transform: translate(30px,-20px) scale(1.05); }
+      66% { transform: translate(-20px,15px) scale(0.95); }
     }
 
-    /* ===== Two-column Layout ===== */
-    .page-layout {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      max-width: 1180px;
-      margin: 0 auto;
-      padding: 0 28px;
-    }
-
-    /* ===== Sidebar Nav ===== */
+    /* ── Sidebar ── */
     .sidebar {
-      width: var(--sidebar-width);
-      flex-shrink: 0;
-      padding: 48px 0 40px;
-      position: sticky;
-      top: 0;
-      height: 100vh;
-      overflow-y: auto;
-      scrollbar-width: thin;
-      scrollbar-color: #cbd5e1 transparent;
-    }
-
-    .sidebar::-webkit-scrollbar {
-      width: 4px;
-    }
-
-    .sidebar::-webkit-scrollbar-thumb {
-      background: #cbd5e1;
-      border-radius: 2px;
-    }
-
-    .sidebar-title {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--text-light);
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      margin-bottom: 20px;
-      padding-left: 16px;
-    }
-
-    .nav-group {
-      margin-bottom: 20px;
-    }
-
-    .nav-l1 {
-      display: block;
-      padding: 8px 16px;
-      font-size: 13.5px;
-      font-weight: 600;
-      color: var(--text-secondary);
-      text-decoration: none;
-      border-left: 3px solid transparent;
-      transition: all 0.2s;
-      line-height: 1.5;
-      cursor: pointer;
-    }
-
-    .nav-l1:hover {
-      color: var(--primary);
-      background: var(--primary-bg);
-    }
-
-    .nav-l1.active {
-      color: var(--primary);
-      border-left-color: var(--primary);
-      background: var(--primary-bg);
-    }
-
-    .nav-l2-list {
-      padding: 0;
-      list-style: none;
-      overflow: hidden;
-      max-height: 0;
-      transition: max-height 0.35s ease;
-    }
-
-    .nav-group.open .nav-l2-list {
-      max-height: 500px;
-    }
-
-    .nav-l2 {
-      display: block;
-      padding: 5px 16px 5px 28px;
-      font-size: 12.5px;
-      color: var(--text-light);
-      text-decoration: none;
-      border-left: 3px solid transparent;
-      transition: all 0.2s;
-      line-height: 1.5;
-    }
-
-    .nav-l2:hover {
-      color: var(--primary);
-    }
-
-    .nav-l2.active {
-      color: var(--primary);
-      border-left-color: var(--primary-light);
-    }
-
-    /* ===== Mobile menu toggle ===== */
-    .menu-toggle {
-      display: none;
-      position: fixed;
-      top: 16px;
-      left: 16px;
-      z-index: 200;
-      width: 40px;
-      height: 40px;
-      border-radius: 10px;
+      position: fixed; top: 0; left: 0;
+      width: var(--sidebar-w); height: 100vh;
       background: var(--bg-card);
-      border: 1px solid #e2e8f0;
-      box-shadow: var(--shadow-md);
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
+      border-right: 1px solid #e2e8f0;
+      padding: 36px 0 36px 0;
+      z-index: 50;
+      overflow-y: auto;
+      transition: transform 0.3s ease;
     }
-
-    .menu-toggle svg {
-      width: 20px;
-      height: 20px;
-      color: var(--text-main);
+    .sidebar-author {
+      padding: 0 24px 20px;
+      border-bottom: 1px solid #e2e8f0;
+      margin-bottom: 16px;
     }
-
-    .sidebar-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      z-index: 99;
-      background: rgba(0, 0, 0, 0.3);
+    .sidebar-author .name {
+      font-family: 'Noto Serif SC', serif;
+      font-size: 16px; font-weight: 700; color: var(--text-main);
     }
-
-    /* ===== Main Content ===== */
-    .main-content {
-      flex: 1;
-      min-width: 0;
-      max-width: 880px;
-      padding: 48px 0 40px 48px;
+    .sidebar-author .role {
+      font-size: 12px; color: var(--text-light); margin-top: 2px;
     }
+    .sidebar-back {
+      display: inline-flex; align-items: center; gap: 5px;
+      color: var(--text-light); text-decoration: none; font-size: 12px;
+      margin-top: 10px; transition: color 0.2s;
+    }
+    .sidebar-back:hover { color: var(--primary); }
+    .sidebar-back svg { width: 14px; height: 14px; }
 
-    .back-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      color: var(--text-light);
+    .nav-group { margin-bottom: 6px; }
+    .nav-group-title {
+      display: flex; align-items: center; gap: 6px;
+      padding: 10px 24px;
+      font-size: 14px; font-weight: 600; color: var(--text-main);
+      cursor: pointer; user-select: none;
+      transition: background 0.15s;
       text-decoration: none;
-      font-size: 14px;
-      margin-bottom: 32px;
-      transition: color 0.2s;
+    }
+    .nav-group-title:hover { background: var(--primary-bg); }
+    .nav-group-title.active { color: var(--primary); }
+    .nav-group-title .arrow {
+      width: 16px; height: 16px;
+      transition: transform 0.2s;
+      flex-shrink: 0;
+      color: var(--text-light);
+    }
+    .nav-group.open .arrow { transform: rotate(90deg); }
+    .nav-children {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+    .nav-group.open .nav-children { max-height: 500px; }
+    .nav-child {
+      display: block;
+      padding: 7px 24px 7px 44px;
+      font-size: 13px; color: var(--text-secondary);
+      text-decoration: none;
+      transition: all 0.15s;
+      border-left: 2px solid transparent;
+    }
+    .nav-child:hover {
+      color: var(--primary); background: var(--primary-bg);
+    }
+    .nav-child.active {
+      color: var(--primary); border-left-color: var(--primary);
+      background: var(--primary-bg); font-weight: 500;
     }
 
-    .back-link:hover {
-      color: var(--primary);
+    /* ── Mobile sidebar toggle ── */
+    .sidebar-toggle {
+      display: none;
+      position: fixed; top: 16px; left: 16px; z-index: 60;
+      width: 40px; height: 40px; border-radius: 10px;
+      background: var(--bg-card); border: 1px solid #e2e8f0;
+      box-shadow: var(--shadow-sm);
+      cursor: pointer; align-items: center; justify-content: center;
+    }
+    .sidebar-toggle svg { width: 20px; height: 20px; color: var(--text-main); }
+    .sidebar-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.3); z-index: 45;
     }
 
-    .back-link svg {
-      width: 16px;
-      height: 16px;
+    /* ── Main content ── */
+    .main {
+      margin-left: var(--sidebar-w);
+      position: relative; z-index: 1;
+    }
+    .container {
+      max-width: 820px; margin: 0 auto; padding: 48px 28px 40px;
     }
 
     .fade-in {
-      opacity: 0;
-      transform: translateY(28px);
+      opacity: 0; transform: translateY(28px);
       transition: opacity 0.65s ease, transform 0.65s ease;
     }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
 
-    .fade-in.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .page-hero {
-      text-align: center;
-      margin-bottom: 56px;
-    }
-
+    .page-hero { text-align: center; margin-bottom: 56px; }
     .page-hero h1 {
       font-family: 'Noto Serif SC', serif;
-      font-size: 38px;
-      font-weight: 700;
-      letter-spacing: 3px;
-      margin-bottom: 12px;
+      font-size: 38px; font-weight: 700; letter-spacing: 3px; margin-bottom: 12px;
     }
-
     .page-hero .subtitle {
-      font-size: 16px;
-      color: var(--text-secondary);
-      max-width: 520px;
-      margin: 0 auto;
-      line-height: 1.8;
+      font-size: 16px; color: var(--text-secondary);
+      max-width: 520px; margin: 0 auto; line-height: 1.8;
     }
-
     .page-hero .divider {
-      width: 48px;
-      height: 3px;
+      width: 48px; height: 3px;
       background: linear-gradient(90deg, var(--primary), var(--primary-light));
-      border-radius: 2px;
-      margin: 20px auto 0;
+      border-radius: 2px; margin: 20px auto 0;
     }
 
-    .project-section {
-      margin-bottom: 56px;
-    }
+    .project-section { margin-bottom: 56px; }
 
     .project-header {
-      background: var(--bg-card);
-      border-radius: var(--radius);
-      padding: 28px 32px;
-      box-shadow: var(--shadow-sm);
-      border: 1px solid #e2e8f0;
-      margin-bottom: 18px;
+      background: var(--bg-card); border-radius: var(--radius);
+      padding: 28px 32px; box-shadow: var(--shadow-sm);
+      border: 1px solid #e2e8f0; margin-bottom: 18px;
     }
-
     .project-number {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--primary);
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      margin-bottom: 8px;
+      font-size: 12px; font-weight: 600; color: var(--primary);
+      text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px;
     }
-
     .project-header h2 {
       font-family: 'Noto Serif SC', serif;
-      font-size: 24px;
-      font-weight: 700;
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
+      font-size: 24px; font-weight: 700; margin-bottom: 10px;
+      display: flex; align-items: center; gap: 10px;
     }
-
     .project-header h2::before {
-      content: '';
-      width: 4px;
-      height: 24px;
-      background: var(--primary);
-      border-radius: 2px;
-      flex-shrink: 0;
+      content: ''; width: 4px; height: 24px;
+      background: var(--primary); border-radius: 2px; flex-shrink: 0;
     }
-
     .project-oneliner {
-      font-size: 14.5px;
-      color: var(--text-secondary);
-      line-height: 1.7;
-      margin-bottom: 16px;
+      font-size: 14.5px; color: var(--text-secondary);
+      line-height: 1.7; margin-bottom: 16px;
     }
-
-    .tech-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 16px;
-    }
-
+    .tech-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
     .tech-tag {
-      background: var(--primary-bg);
-      color: var(--primary);
-      font-size: 12.5px;
-      font-weight: 500;
-      padding: 4px 12px;
-      border-radius: 16px;
-      border: 1px solid var(--primary-subtle);
-      transition: all 0.2s ease;
-      cursor: default;
+      background: var(--primary-bg); color: var(--primary);
+      font-size: 12.5px; font-weight: 500; padding: 4px 12px;
+      border-radius: 16px; border: 1px solid var(--primary-subtle);
+      transition: all 0.2s ease; cursor: default;
     }
+    .tech-tag:hover { background: var(--primary); color: white; }
 
-    .tech-tag:hover {
-      background: var(--primary);
-      color: white;
-    }
-
-    .project-actions {
-      display: flex;
-      gap: 12px;
-    }
-
+    .project-actions { display: flex; gap: 12px; }
     .github-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 20px;
-      border-radius: 10px;
-      background: var(--text-main);
-      color: white;
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 500;
-      transition: all 0.25s ease;
-      border: 1px solid var(--text-main);
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 20px; border-radius: 10px;
+      background: var(--text-main); color: white; text-decoration: none;
+      font-size: 14px; font-weight: 500;
+      transition: all 0.25s ease; border: 1px solid var(--text-main);
     }
-
     .github-btn:hover {
-      background: #000;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      background: #000; transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     }
-
-    .github-btn svg {
-      width: 18px;
-      height: 18px;
-    }
+    .github-btn svg { width: 18px; height: 18px; }
 
     .article-body {
-      background: var(--bg-card);
-      border-radius: var(--radius);
-      padding: 36px 36px;
-      box-shadow: var(--shadow-sm);
+      background: var(--bg-card); border-radius: var(--radius);
+      padding: 36px 36px; box-shadow: var(--shadow-sm);
       border: 1px solid #e2e8f0;
     }
-
     .section-title {
       font-family: 'Noto Serif SC', serif;
-      font-size: 20px;
-      font-weight: 700;
-      color: var(--text-main);
-      margin-top: 36px;
-      margin-bottom: 16px;
-      padding-left: 14px;
-      border-left: 3px solid var(--primary);
+      font-size: 20px; font-weight: 700; color: var(--text-main);
+      margin-top: 36px; margin-bottom: 16px;
+      padding-left: 14px; border-left: 3px solid var(--primary);
     }
-
-    .article-body .section-title:first-child {
-      margin-top: 0;
-    }
-
+    .article-body .section-title:first-child { margin-top: 0; }
     .sub-title {
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--text-main);
-      margin-top: 24px;
-      margin-bottom: 10px;
+      font-size: 16px; font-weight: 600; color: var(--text-main);
+      margin-top: 24px; margin-bottom: 10px;
     }
-
     .desc-label {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--primary);
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      margin-top: 24px;
-      margin-bottom: 6px;
+      font-size: 13px; font-weight: 600; color: var(--primary);
+      text-transform: uppercase; letter-spacing: 1.5px;
+      margin-top: 24px; margin-bottom: 6px;
     }
-
     .article-body p {
-      font-size: 14.5px;
-      color: var(--text-secondary);
-      line-height: 1.85;
-      margin-bottom: 14px;
+      font-size: 14.5px; color: var(--text-secondary);
+      line-height: 1.85; margin-bottom: 14px;
     }
-
-    .article-body p:last-child {
-      margin-bottom: 0;
-    }
-
-    .article-body strong {
-      color: var(--text-main);
-      font-weight: 600;
-    }
-
+    .article-body p:last-child { margin-bottom: 0; }
+    .article-body strong { color: var(--text-main); font-weight: 600; }
     .article-body code {
-      background: var(--primary-bg);
-      color: var(--primary-dark);
-      font-size: 13px;
-      padding: 2px 7px;
-      border-radius: 5px;
+      background: var(--primary-bg); color: var(--primary-dark);
+      font-size: 13px; padding: 2px 7px; border-radius: 5px;
       font-family: 'SF Mono', 'Fira Code', monospace;
     }
-
-    .article-body ul {
-      padding-left: 20px;
-      margin-bottom: 14px;
-    }
-
+    .article-body ul { padding-left: 20px; margin-bottom: 14px; }
     .article-body ul li {
-      font-size: 14.5px;
-      color: var(--text-secondary);
-      line-height: 1.85;
-      margin-bottom: 6px;
+      font-size: 14.5px; color: var(--text-secondary);
+      line-height: 1.85; margin-bottom: 6px;
     }
-
-    .article-body ul li strong {
-      color: var(--text-main);
-    }
+    .article-body ul li strong { color: var(--text-main); }
 
     .fig {
-      margin: 20px 0;
-      border-radius: 10px;
-      overflow: hidden;
-      background: #f1f5f9;
-      border: 1px solid #e2e8f0;
+      margin: 20px 0; border-radius: 10px; overflow: hidden;
+      background: #f1f5f9; border: 1px solid #e2e8f0;
     }
-
     .fig-img-wrapper {
-      position: relative;
-      width: 100%;
-      min-height: 120px;
+      position: relative; width: 100%; min-height: 120px;
       background: linear-gradient(135deg, var(--primary-bg) 0%, #e0e7ff 100%);
     }
-
     .fig-img-wrapper::before {
-      content: '加载中…';
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--text-light);
-      font-size: 13px;
-      z-index: 1;
-      pointer-events: none;
-      transition: opacity 0.3s;
+      content: '加载中…'; position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-light); font-size: 13px;
+      z-index: 1; pointer-events: none; transition: opacity 0.3s;
     }
-
-    .fig-img-wrapper.loaded::before {
-      opacity: 0;
-    }
-
+    .fig-img-wrapper.loaded::before { opacity: 0; }
     .fig-img-wrapper.error::before {
       content: '图片加载失败，点击重试';
-      color: var(--text-secondary);
-      cursor: pointer;
-      pointer-events: auto;
+      color: var(--text-secondary); cursor: pointer; pointer-events: auto;
     }
-
     .fig img {
-      width: 100%;
-      display: block;
-      position: relative;
-      z-index: 2;
-      opacity: 0;
-      transition: opacity 0.4s ease;
+      width: 100%; display: block;
+      position: relative; z-index: 2;
+      opacity: 0; transition: opacity 0.4s ease;
     }
-
-    .fig-img-wrapper.loaded img {
-      opacity: 1;
-    }
-
+    .fig-img-wrapper.loaded img { opacity: 1; }
     .fig-caption {
-      padding: 10px 16px;
-      font-size: 12.5px;
-      color: var(--text-light);
-      text-align: center;
-      background: #f8fafc;
-      border-top: 1px solid #e2e8f0;
+      padding: 10px 16px; font-size: 12.5px; color: var(--text-light);
+      text-align: center; background: #f8fafc; border-top: 1px solid #e2e8f0;
     }
 
     .fig-group {
-      margin: 20px 0;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
+      margin: 20px 0; display: flex; flex-direction: column; gap: 12px;
     }
-
-    .fig-group .fig {
-      margin: 0;
-    }
-
+    .fig-group .fig { margin: 0; }
     .fig-group-label {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text-main);
-      margin-bottom: 4px;
+      font-size: 13px; font-weight: 600; color: var(--text-main); margin-bottom: 4px;
     }
 
     .article-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 18px 0;
-      font-size: 13.5px;
+      width: 100%; border-collapse: collapse; margin: 18px 0; font-size: 13.5px;
     }
-
     .article-table th {
-      background: var(--primary-bg);
-      color: var(--primary-dark);
-      font-weight: 600;
-      padding: 10px 14px;
-      text-align: left;
-      border-bottom: 2px solid var(--primary-subtle);
-      white-space: nowrap;
+      background: var(--primary-bg); color: var(--primary-dark);
+      font-weight: 600; padding: 10px 14px; text-align: left;
+      border-bottom: 2px solid var(--primary-subtle); white-space: nowrap;
     }
-
     .article-table td {
-      padding: 9px 14px;
-      color: var(--text-secondary);
+      padding: 9px 14px; color: var(--text-secondary);
       border-bottom: 1px solid #e2e8f0;
     }
-
-    .article-table tr:last-child td {
-      border-bottom: none;
-    }
-
-    .article-table tbody tr:hover {
-      background: #f8fafc;
-    }
+    .article-table tr:last-child td { border-bottom: none; }
+    .article-table tbody tr:hover { background: #f8fafc; }
 
     .section-divider {
-      width: 100%;
-      height: 1px;
-      background: #e2e8f0;
-      margin: 0 0 56px;
-      position: relative;
+      width: 100%; height: 1px; background: #e2e8f0;
+      margin: 0 0 56px; position: relative;
     }
-
     .section-divider::after {
-      content: '✦';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: var(--bg-page);
-      padding: 0 16px;
-      color: var(--text-light);
-      font-size: 14px;
+      content: '✦'; position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
+      background: var(--bg-page); padding: 0 16px;
+      color: var(--text-light); font-size: 14px;
     }
 
     .footer {
-      margin-top: 48px;
-      padding-top: 28px;
-      border-top: 1px solid #e2e8f0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 16px;
+      margin-top: 48px; padding-top: 28px; border-top: 1px solid #e2e8f0;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 16px;
     }
-
-    .footer-left {
-      color: var(--text-light);
-      font-size: 13px;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 18px;
-    }
-
+    .footer-left { color: var(--text-light); font-size: 13px; }
+    .footer-links { display: flex; gap: 18px; }
     .footer-links a {
-      color: var(--text-light);
-      text-decoration: none;
-      font-size: 13px;
+      color: var(--text-light); text-decoration: none; font-size: 13px;
       transition: color 0.2s;
     }
-
-    .footer-links a:hover {
-      color: var(--primary);
-    }
+    .footer-links a:hover { color: var(--primary); }
 
     .lightbox {
-      display: none;
-      position: fixed;
-      inset: 0;
-      z-index: 100;
-      background: rgba(0, 0, 0, 0.85);
-      align-items: center;
-      justify-content: center;
-      padding: 40px;
-      cursor: zoom-out;
-      animation: lbFadeIn 0.25s ease;
+      display: none; position: fixed; inset: 0; z-index: 100;
+      background: rgba(0,0,0,0.85);
+      align-items: center; justify-content: center;
+      padding: 40px; cursor: zoom-out; animation: lbFadeIn 0.25s ease;
     }
-
-    .lightbox.open {
-      display: flex;
-    }
-
-    @keyframes lbFadeIn {
-      from {
-        opacity: 0;
-      }
-
-      to {
-        opacity: 1;
-      }
-    }
-
+    .lightbox.open { display: flex; }
+    @keyframes lbFadeIn { from { opacity: 0; } to { opacity: 1; } }
     .lightbox img {
-      max-width: 90vw;
-      max-height: 85vh;
-      border-radius: 8px;
-      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
-      cursor: default;
+      max-width: 90vw; max-height: 85vh; border-radius: 8px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.4); cursor: default;
     }
-
     .lightbox-close {
-      position: absolute;
-      top: 20px;
-      right: 24px;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.15);
-      border: none;
-      color: white;
-      font-size: 22px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      position: absolute; top: 20px; right: 24px;
+      width: 40px; height: 40px; border-radius: 50%;
+      background: rgba(255,255,255,0.15); border: none; color: white;
+      font-size: 22px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
       transition: background 0.2s;
     }
+    .lightbox-close:hover { background: rgba(255,255,255,0.3); }
 
-    .lightbox-close:hover {
-      background: rgba(255, 255, 255, 0.3);
-    }
-
-    /* ===== Mobile ===== */
     @media (max-width: 900px) {
-      .page-layout {
-        padding: 0 18px;
-      }
-
-      .menu-toggle {
-        display: flex;
-      }
-
-      .sidebar {
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: 100;
-        width: 280px;
-        height: 100vh;
-        background: var(--bg-card);
-        border-right: 1px solid #e2e8f0;
-        box-shadow: 4px 0 24px rgba(0, 0, 0, 0.1);
-        padding: 64px 0 40px;
-        transform: translateX(-100%);
-        transition: transform 0.3s ease;
-      }
-
-      .sidebar.open {
-        transform: translateX(0);
-      }
-
-      .sidebar-overlay.open {
-        display: block;
-      }
-
-      .main-content {
-        padding: 64px 0 28px;
-        max-width: 100%;
-      }
-
-      .page-hero h1 {
-        font-size: 28px;
-      }
-
-      .project-header {
-        padding: 22px 20px;
-      }
-
-      .project-header h2 {
-        font-size: 20px;
-      }
-
-      .article-body {
-        padding: 24px 20px;
-      }
-
-      .section-title {
-        font-size: 18px;
-      }
-
-      .project-section {
-        margin-bottom: 40px;
-      }
-
-      .section-divider {
-        margin-bottom: 40px;
-      }
-
-      .github-btn {
-        width: 100%;
-        justify-content: center;
-      }
-
-      .project-actions {
-        flex-direction: column;
-      }
-
-      .footer {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-      }
-
-      .page-bg::before {
-        width: 260px;
-        height: 260px;
-      }
-
-      .page-bg::after {
-        width: 200px;
-        height: 200px;
-      }
-
-      .lightbox {
-        padding: 20px;
-      }
-
-      .article-table {
-        font-size: 12px;
-      }
-
-      .article-table th,
-      .article-table td {
-        padding: 7px 8px;
-      }
+      .sidebar { transform: translateX(-100%); }
+      .sidebar.open { transform: translateX(0); }
+      .sidebar-toggle { display: flex; }
+      .sidebar-overlay.open { display: block; }
+      .main { margin-left: 0; }
+      .container { padding: 64px 18px 28px; }
     }
-
     @media (max-width: 480px) {
-      .page-hero h1 {
-        font-size: 24px;
-      }
+      .page-hero h1 { font-size: 24px; }
+      .project-header h2 { font-size: 20px; }
+      .article-body { padding: 24px 20px; }
+      .section-title { font-size: 18px; }
+      .github-btn { width: 100%; justify-content: center; }
+      .project-actions { flex-direction: column; }
+      .footer { flex-direction: column; align-items: center; text-align: center; }
+      .article-table { font-size: 12px; }
+      .article-table th, .article-table td { padding: 7px 8px; }
     }
   </style>
 </head>
-
 <body>
   <div class="page-bg"></div>
 
-  <!-- Mobile menu toggle -->
-  <button class="menu-toggle" id="menuToggle" aria-label="打开目录">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-      stroke-linejoin="round">
-      <path d="M3 12h18" />
-      <path d="M3 6h18" />
-      <path d="M3 18h18" />
-    </svg>
+  <!-- ═══ Mobile toggle ═══ -->
+  <button class="sidebar-toggle" id="sidebarToggle" aria-label="展开目录">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
   </button>
   <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-  <div class="page-layout">
+  <!-- ═══ Sidebar ═══ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-author">
+      <div class="name">林诗剑</div>
+      <div class="role">作品集</div>
+      <a class="sidebar-back" href="./index.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+        返回主页
+      </a>
+    </div>
+    <nav class="sidebar-nav">
 
-    <!-- ===== Sidebar ===== -->
-    <nav class="sidebar" id="sidebar">
-      <div class="sidebar-title">目录</div>
-
-      <div class="nav-group open" data-project="p1">
-        <a class="nav-l1" href="#project-1">Agent Benchmark 评测体系设计与多模型能力诊断</a>
-        <ul class="nav-l2-list">
-          <li><a class="nav-l2" href="#p1-bg">一、实验背景</a></li>
-          <li><a class="nav-l2" href="#p1-results">二、各模型任务完成状态</a></li>
-          <li><a class="nav-l2" href="#p1-findings">三、性能排序与核心发现</a></li>
-          <li><a class="nav-l2" href="#p1-future">四、项目未来升级点</a></li>
-        </ul>
+      <!-- Project 01 -->
+      <div class="nav-group open" data-group="p1">
+        <a class="nav-group-title" href="#p1">
+          <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          Project 01 · Agent Benchmark
+        </a>
+        <div class="nav-children">
+          <a class="nav-child" href="#p1-s1">实验背景</a>
+          <a class="nav-child" href="#p1-s2">各模型任务完成状态</a>
+          <a class="nav-child" href="#p1-s3">性能排序与核心发现</a>
+          <a class="nav-child" href="#p1-s4">项目未来升级点</a>
+        </div>
       </div>
 
-      <div class="nav-group" data-project="p2">
-        <a class="nav-l1" href="#project-2">MCP 召回评估自动化</a>
-        <ul class="nav-l2-list">
-          <li><a class="nav-l2" href="#p2-bg">问题背景</a></li>
-          <li><a class="nav-l2" href="#p2-method">我的做法</a></li>
-          <li><a class="nav-l2" href="#p2-result">成果</a></li>
-        </ul>
+      <!-- Project 02 -->
+      <div class="nav-group" data-group="p2">
+        <a class="nav-group-title" href="#p2">
+          <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          Project 02 · MCP 召回评估
+        </a>
+        <div class="nav-children">
+          <a class="nav-child" href="#p2-s1">问题背景</a>
+          <a class="nav-child" href="#p2-s2">我的做法</a>
+          <a class="nav-child" href="#p2-s3">成果</a>
+        </div>
       </div>
 
     </nav>
+  </aside>
 
-    <!-- ===== Main Content ===== -->
-    <div class="main-content">
-
-      <a class="back-link fade-in" href="./index.html">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-          stroke-linejoin="round">
-          <path d="M19 12H5" />
-          <path d="M12 19l-7-7 7-7" />
-        </svg>
-        返回主页
-      </a>
+  <!-- ═══ Main Content ═══ -->
+  <div class="main">
+    <div class="container">
 
       <section class="page-hero fade-in">
         <h1>作品集</h1>
@@ -879,25 +443,23 @@
       </section>
 
       <!-- ═══════ 项目一：Agent Benchmark ═══════ -->
-      <section class="project-section fade-in" id="project-1">
+      <section id="p1" class="project-section fade-in">
 
         <div class="project-header">
           <div class="project-number">Project 01</div>
           <h2>Agent Benchmark 评测体系设计与多模型能力诊断</h2>
-          <p class="project-oneliner">搭建最小化 Coding Agent，接入五个模型在同一 bug 修复任务上进行能力评测</p>
+          <p class="project-oneliner">搭建最小化 Coding Agent，在同一个跨文件 bug 修复任务上对比五个模型的自主编程能力，揭示"Agent 能力 ≠ 推理能力"。</p>
           <div class="tech-tags">
-            <span class="tech-tag">Benchmark</span>
-            <span class="tech-tag">Claude Opus 4.6</span>
-            <span class="tech-tag">DeepSeek-V3.2</span>
+            <span class="tech-tag">Opus 4.6</span>
+            <span class="tech-tag">DeepSeek V3.2</span>
             <span class="tech-tag">GPT 5.4</span>
             <span class="tech-tag">GLM-5</span>
+            <span class="tech-tag">A/B Testing</span>
+            <span class="tech-tag">Benchmark</span>
           </div>
           <div class="project-actions">
             <a class="github-btn" href="https://github.com/LinWenzhaoya/Autonomous-Bug-Fixing-Benchmark-for-Coding-Agents" target="_blank" rel="noopener noreferrer">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path
-                  d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
-              </svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
               查看源码
             </a>
           </div>
@@ -905,22 +467,14 @@
 
         <div class="article-body">
 
-          <h3 class="section-title" id="p1-bg">一、实验背景</h3>
+          <h3 id="p1-s1" class="section-title">实验背景</h3>
+          <p>搭建了一个最小化的 Claude Code 风格 Coding Agent，通过 API 分别接入五个模型（Claude Opus 4.6、DeepSeek-V3.2 Chat、DeepSeek-V3.2 Reason、GLM-5 Turbo、GPT 5.4），在同一个 bug 修复任务上对比它们的自主编程能力。其中 DeepSeek-V3.2 分别测试了 Chat 和 Reason 两个版本——在底座模型完全相同的条件下，验证"推理能力更强是否意味着 Agent 表现更好"这一假设。</p>
+          <p>Agent 实现了核心 tool loop：模型做决策、调用 <code>read_file</code> / <code>search_code</code> / <code>write_patch</code> / <code>run_command</code> 等工具、根据结果继续推进，并统一记录 trace。为控制变量，所有模型共享相同的 system prompt、工具定义、上下文压缩策略（12K 字符触发）和步数上限（max_steps=25），每个模型跑 5 次取分布。</p>
 
-          <p>搭建一个最小化的 Claude Code 风格 Coding Agent，通过 API 分别接入五个模型（Claude Opus 4.6、DeepSeek-V3.2 Chat、DeepSeek-V3.2
-            Reason、GLM-5 Turbo、GPT 5.4），在同一个 bug 修复任务上对比它们的自主编程能力。其中 DeepSeek-V3.2 分别测试了 Chat 和 Reason
-            两个版本——在底座模型完全相同的条件下，验证"推理能力更强是否意味着 Agent 表现更好"这一假设。</p>
-          <p>Agent 实现了核心 tool loop：模型做决策、调用 <code>read_file</code> / <code>search_code</code> / <code>write_patch</code>
-            / <code>run_command</code> 等工具、根据结果继续推进，并统一记录 trace。为控制变量，所有模型共享相同的 system prompt、工具定义、上下文压缩策略（12K
-            字符触发）和步数上限（max_steps=25），每个模型跑 5 次取分布。</p>
-          <p>测试任务是一个<strong>跨模块共享状态污染类 bug</strong>：<code>routes.py</code> 的 <code>handle_batch_users</code> 将
-            <code>utils._time_snapshot</code> 设为"明天"的时间戳，但执行后忘记恢复为 <code>None</code>，导致后续
-            <code>auth.verify_token()</code> 调用 <code>utils.current_timestamp()</code> 时拿到被污染的"未来时间"，刚签发的 token
-            也被判为已过期。表面上 traceback 指向 <code>auth.py</code>，但 <code>auth.py</code> 逻辑完全正确——Agent
-            必须跳出当前文件，理解共享状态被外部篡改的可能性，才能跨文件追到根因。
-          </p>
+          <div class="desc-label">测试任务设计</div>
+          <p>测试任务是一个跨模块共享状态污染类 bug：<code>routes.py</code> 的 <code>handle_batch_users</code> 将 <code>utils._time_snapshot</code> 设为"明天"的时间戳，但执行后忘记恢复为 <code>None</code>，导致后续 <code>auth.verify_token()</code> 调用 <code>utils.current_timestamp()</code> 时拿到被污染的"未来时间"，刚签发的 token 也被判为已过期。表面上 traceback 指向 <code>auth.py</code>，但 <code>auth.py</code> 逻辑完全正确——Agent 必须跳出当前文件，理解共享状态被外部篡改的可能性，才能跨文件追到根因。整条推理链的关键转折不是读懂某一行代码，而是意识到问题不在当前文件内部。</p>
 
-          <h3 class="section-title" id="p1-results">二、各模型任务完成状态</h3>
+          <h3 id="p1-s2" class="section-title">各模型任务完成状态</h3>
 
           <table class="article-table">
             <thead>
@@ -935,34 +489,34 @@
             <tbody>
               <tr>
                 <td><strong>Opus 4.6</strong></td>
-                <td>4/5</td>
+                <td><strong>4/5</strong></td>
                 <td>13.75</td>
                 <td>4/5</td>
                 <td>成功</td>
               </tr>
               <tr>
                 <td><strong>DS-V3.2 Chat</strong></td>
-                <td>4/5</td>
+                <td><strong>4/5</strong></td>
                 <td>21.75</td>
                 <td>5/5</td>
                 <td>成功</td>
               </tr>
               <tr>
-                <td><strong>GLM5-Turbo</strong></td>
+                <td>GLM5-Turbo</td>
                 <td>2/5</td>
                 <td>16</td>
                 <td>5/5</td>
                 <td>部分完成</td>
               </tr>
               <tr>
-                <td><strong>DS-V3.2 Reason</strong></td>
+                <td>DS-V3.2 Reason</td>
                 <td>1/5</td>
                 <td>17</td>
                 <td>5/5</td>
                 <td>部分完成</td>
               </tr>
               <tr>
-                <td><strong>GPT 5.4</strong></td>
+                <td>GPT 5.4</td>
                 <td>0/5</td>
                 <td>—</td>
                 <td>4/5</td>
@@ -971,9 +525,8 @@
             </tbody>
           </table>
 
-          <p><strong>Opus 4.6</strong> 表现最稳定。四次成功 run 的路径高度一致：通读关键文件后迅速锁定根因、调用 <code>write_patch</code>、验证通过。最佳一次仅 12
-            步完成，是全场最优。唯一失败来自探索策略问题，即碎片化读取错过了 bug 所在行，而非推理或工具调用能力不足。它是本组中最稳定、最接近可上线 Agent 行为模式的模型：推理、工具调用、自主推进三项能力都比较均衡。
-          </p>
+          <div class="sub-title">Opus 4.6 — 最稳定的全能选手</div>
+          <p><strong>Opus 4.6</strong> 表现最稳定。四次成功 run 的路径高度一致：通读关键文件后迅速锁定根因、调用 <code>write_patch</code>、验证通过。最佳一次仅 12 步完成，是全场最优。唯一失败来自探索策略问题，即碎片化读取错过了 bug 所在行，而非推理或工具调用能力不足。它是本组中最稳定、最接近可上线 Agent 行为模式的模型：推理、工具调用、自主推进三项能力都比较均衡，不需要额外等待用户确认。</p>
 
           <div class="fig">
             <div class="fig-img-wrapper">
@@ -982,11 +535,11 @@
             <div class="fig-caption">Opus 4.6 Run 4 终端输出</div>
           </div>
 
-          <p><strong>DS-V3.2 Chat</strong> 成功率与 Opus 并列，但效率低一档。它通常在中前期就锁定了 bug 区域，却倾向于反复重读多个文件"建立信心"，成功 runs 平均步数约为 Opus
-            的 1.6 倍。唯一失败不是判断错误，而是在 25 步内始终没有跨过执行 patch 的决策门槛，更像执行阈值过高，而非推理错误。它的优势是结构化输出和工具参数兼容性非常好：零格式重试、零参数幻觉。</p>
+          <div class="sub-title">DS-V3.2 Chat — 成功率并列但效率低一档</div>
+          <p><strong>DS-V3.2 Chat</strong> 成功率与 Opus 并列，但效率低一档。它通常在中前期就锁定了 bug 区域，却倾向于反复重读多个文件"建立信心"，成功 runs 平均步数约为 Opus 的 1.6 倍。唯一失败不是判断错误，而是在 25 步内始终没有跨过执行 patch 的决策门槛，更像执行阈值过高，而非推理错误。它的优势是结构化输出和工具参数兼容性非常好：零格式重试、零参数幻觉。</p>
 
-          <p><strong>GLM5-Turbo</strong> 成功时并不慢，说明底层能力够用；但三次失败都与工具参数幻觉有关。它会在 <code>read_file</code>
-            等工具参数中夹带大量不存在的内容，导致单步上下文异常膨胀，进一步引发编造 bug、错误宣称"已修复"，甚至触发 API 限速崩溃。</p>
+          <div class="sub-title">GLM5-Turbo — 底层能力够用，但工具幻觉频发</div>
+          <p><strong>GLM5-Turbo</strong> 成功时并不慢，说明底层能力是够用的；但三次失败都与工具参数幻觉有关。它会在 <code>read_file</code> 等工具参数中夹带大量不存在的内容，导致单步上下文异常膨胀，进一步引发编造 bug、错误宣称"已修复"，甚至触发 API 限速崩溃。它的问题不是不会修，而是工具调用可靠性不足，而这在 Agent 场景里是高破坏性的缺陷。</p>
 
           <div class="fig">
             <div class="fig-img-wrapper">
@@ -995,10 +548,8 @@
             <div class="fig-caption">GLM5-Turbo Run 5 崩溃过程</div>
           </div>
 
-          <p><strong>DS-V3.2 Reason</strong> 的特点最鲜明：诊断正确率 100%，全场最高，但仅 1 次成功调用 <code>write_patch</code>。其余四次 FINAL
-            ANSWER 都声称"已修复，所有测试通过"，而 post-run validation
-            显示测试仍然失败。这是一种典型的<strong>执行幻觉</strong>：模型在推理链中已经构造出正确修复方案，但未能把它正确序列化为工具调用，反而误以为自己已经执行了。与 Chat
-            版对比很鲜明：同一底座模型，Reason 20% vs Chat 80%。</p>
+          <div class="sub-title">DS-V3.2 Reason — 诊断满分但执行幻觉严重</div>
+          <p><strong>DS-V3.2 Reason</strong> 的特点最鲜明：诊断正确率 100%，全场最高，但仅 1 次成功调用 <code>write_patch</code>。其余四次 FINAL ANSWER 都声称"已修复，所有测试通过"，而 post-run validation 显示测试仍然失败。这是一种典型的执行幻觉：模型在推理链中已经构造出正确修复方案，但未能把它正确序列化为工具调用，反而误以为自己已经执行了。与 Chat 版对比很鲜明：同一底座模型，Reason 20% vs Chat 80%，说明推理增强并未自动转化为更高的任务完成率。</p>
 
           <div class="fig">
             <div class="fig-img-wrapper">
@@ -1007,19 +558,17 @@
             <div class="fig-caption">DS-V3.2 Reason — FINAL ANSWER 与 validation 矛盾</div>
           </div>
 
-          <p><strong>GPT 5.4</strong> 五次全部失败，但四次诊断正确。与 Reason 的"执行幻觉"不同，GPT 5.4 通常明确知道自己还没修复——FINAL ANSWER
-            的措辞是"建议补丁如下""请让我继续"。它更倾向于把自己定位为顾问而非执行者，系统性地等待用户确认后再行动。在本实验的自主执行设定下，这种行为模式直接导致任务完成率为 0。</p>
+          <div class="sub-title">GPT 5.4 — 诊断正确但拒绝自主执行</div>
+          <p><strong>GPT 5.4</strong> 五次全部失败，但四次诊断正确。与 Reason 的"执行幻觉"不同，GPT 5.4 通常明确知道自己还没修复——FINAL ANSWER 的措辞是"建议补丁如下""请让我继续"。它更倾向于把自己定位为顾问而非执行者，系统性地等待用户确认后再行动。在本实验的自主执行设定下，这种行为模式直接导致任务完成率为 0。</p>
 
-          <h3 class="section-title" id="p1-findings">三、性能排序与核心发现</h3>
+          <h3 id="p1-s3" class="section-title">性能排序与核心发现</h3>
 
-          <div class="sub-title">排序结论</div>
-          <p><strong>Opus 4.6 > DS-V3.2 Chat > GLM5-Turbo > DS-V3.2 Reason > GPT 5.4</strong></p>
-          <p>排序依据为：任务完成度 > 修复正确性 > 效率 > 稳定性。前两名成功率同为 80%，Opus 胜在效率和自主性：平均 13.75 步 vs 21.75 步。如果将 max_steps 从 25 收紧到
-            15，DS Chat 会显著退化而 Opus 仍有余量。GLM5-Turbo 排第三，40% 成功率说明底层能力够用，但工具参数幻觉是模型层面的系统性缺陷。DS-V3.2 Reason 排在 GPT 5.4
-            之前，理由是至少成功过 1 次（20% vs 0%），且 100% 诊断正确率意味着解决格式适配问题后上限可能很高。GPT 5.4 在本实验中成功率最低——在 Agent
-            场景下，诊断正确但不执行修复，与诊断错误在任务完成度上是等价的失败。</p>
+          <div class="desc-label">排序结论</div>
+          <p><strong>Opus 4.6 &gt; DS-V3.2 Chat &gt; GLM5-Turbo &gt; DS-V3.2 Reason &gt; GPT 5.4</strong></p>
+          <p>排序依据为：任务完成度 &gt; 修复正确性 &gt; 效率 &gt; 稳定性。前两名成功率同为 80%，Opus 胜在效率和自主性：平均 13.75 步 vs 21.75 步。如果将 max_steps 从 25 收紧到 15，DS Chat 会显著退化而 Opus 仍有余量。GLM5-Turbo 排第三，40% 成功率说明底层能力够用，但工具参数幻觉是模型层面的系统性缺陷。DS-V3.2 Reason 排在 GPT 5.4 之前，理由是至少成功过 1 次（20% vs 0%），且 100% 诊断正确率意味着解决格式适配问题后上限可能很高。GPT 5.4 在本实验中成功率最低——在 Agent 场景下，诊断正确但不执行修复，与诊断错误在任务完成度上是等价的失败。</p>
 
-          <div class="sub-title">失败模式分类</div>
+          <div class="desc-label">失败模式分类</div>
+
           <table class="article-table">
             <thead>
               <tr>
@@ -1031,25 +580,25 @@
             </thead>
             <tbody>
               <tr>
-                <td><strong>A. 探索策略失误</strong></td>
+                <td><strong>探索策略失误</strong></td>
                 <td>推理和工具正常，但读取策略不当导致错过信息或步数耗尽</td>
                 <td>Opus Run 2、DS Chat Run 3</td>
                 <td>repo navigation 策略数据</td>
               </tr>
               <tr>
-                <td><strong>B. 行为范式错位</strong></td>
+                <td><strong>行为范式错位</strong></td>
                 <td>诊断正确，知道自己没修复，但主动等待用户确认</td>
                 <td>GPT 5.4 全部 run</td>
                 <td>"诊断→直接执行"的 agent trajectory 数据</td>
               </tr>
               <tr>
-                <td><strong>C. 执行幻觉</strong></td>
+                <td><strong>执行幻觉</strong></td>
                 <td>诊断正确，声称已修复但实际未调用 write_patch</td>
                 <td>DS Reason Run 1/3/4/5</td>
                 <td>tool call 序列化训练，强化"想 ≠ 做"的边界</td>
               </tr>
               <tr>
-                <td><strong>D. 工具幻觉</strong></td>
+                <td><strong>工具幻觉</strong></td>
                 <td>参数注入垃圾内容，上下文膨胀/编造结果/系统崩溃</td>
                 <td>GLM5 Run 1/3/5</td>
                 <td>schema adherence 数据，参数约束反例</td>
@@ -1057,30 +606,20 @@
             </tbody>
           </table>
 
-          <div class="sub-title">核心发现</div>
-          <p><strong>Agent 能力 ≠ 推理能力。</strong>这是本次实验最重要的结论。DS-V3.2 Reason 诊断正确率 100% 但任务完成率仅 20%；GPT 5.4 诊断正确率 80%
-            但任务完成率 0%——推理能力与 Agent 能力之间是非线性关系。Agent
-            能力至少由三个独立维度构成：跨文件重建因果链的<strong>推理能力</strong>、把修复方案可靠序列化为工具调用的<strong>执行能力</strong>、在无需用户确认时持续推进任务的<strong>行为范式</strong>。这三项能力缺一不可，且在本实验中并未表现出稳定的正相关关系。
-          </p>
-          <p><strong>同一底座模型，Chat 显著优于 Reason。</strong>DS-V3.2 Chat 80% vs Reason 20%，差距 4 倍。Reason
-            更长的推理链不仅没有带来更高完成率，反而导致格式冲突和执行幻觉。这意味着对于 Agent 场景，模型训练的优化方向不应只是"想得更深"，而应同时保障"工具调用更可靠、格式遵循更严格"。</p>
+          <div class="desc-label">核心发现</div>
+          <p><strong>Agent 能力 ≠ 推理能力。</strong>这是本次实验最重要的结论。DS-V3.2 Reason 诊断正确率 100% 但任务完成率仅 20%；GPT 5.4 诊断正确率 80% 但任务完成率 0%——推理能力与 Agent 能力之间是非线性关系。Agent 能力至少由三个独立维度构成：跨文件重建因果链的<strong>推理能力</strong>、把修复方案可靠序列化为工具调用的<strong>执行能力</strong>、在无需用户确认时持续推进任务的<strong>行为范式</strong>。这三项能力缺一不可，且在本实验中并未表现出稳定的正相关关系。</p>
+          <p><strong>同一底座模型，Chat 显著优于 Reason。</strong>DS-V3.2 Chat 80% vs Reason 20%，差距 4 倍。Reason 更长的推理链不仅没有带来更高完成率，反而导致格式冲突和执行幻觉。这意味着对于 Agent 场景，模型训练的优化方向不应只是"想得更深"，而应同时保障"工具调用更可靠、格式遵循更严格"。</p>
 
-          <h3 class="section-title" id="p1-future">四、项目未来升级点</h3>
+          <h3 id="p1-s4" class="section-title">项目未来升级点</h3>
 
           <div class="sub-title">1. 任务复杂度升级</div>
-          <p>当前任务是单跳状态污染，推理链只有一个转折点，各模型诊断正确率普遍偏高，任务已无法有效区分模型能力的上限。升级的核心是拉长根因定位所需的推理链：将污染链扩展为多跳（A 污染 B、B 影响 C，根因在 A 但报错在
-            C）、引入时序依赖（只在特定调用顺序下触发）、加入看起来可疑但实际无害的干扰项。</p>
+          <p>当前任务是单跳状态污染，推理链只有一个转折点，各模型诊断正确率普遍偏高，任务已无法有效区分模型能力的上限。升级的核心是拉长根因定位所需的推理链：将污染链扩展为多跳（A 污染 B、B 影响 C，根因在 A 但报错在 C）、引入时序依赖（只在特定调用顺序下触发）、加入看起来可疑但实际无害的干扰项。</p>
 
           <div class="sub-title">2. 评测指标升级</div>
-          <p>当前指标是任务成功率和平均步数，对"推理效率"这个维度没有感知能力。需要引入两个新指标：<strong>单位成功率的 token 成本</strong>（Opus 4.6 与 DS Chat 成功率并列，但步数差
-            1.6 倍，折算 token 成本后两者并不是同一档位）；<strong>首次正确工具调用出现在第几步</strong>（比总步数更精准地量化 overthinking，让推理效率变成可测量的量而非定性观察）。
-          </p>
+          <p>当前指标是任务成功率和平均步数，对"推理效率"这个维度没有感知能力。需要引入两个新指标：<strong>单位成功率的 token 成本</strong>（Opus 4.6 与 DS Chat 成功率并列，但步数差 1.6 倍，折算 token 成本后两者并不是同一档位）；<strong>首次正确工具调用出现在第几步</strong>（比总步数更精准地量化 overthinking，让推理效率变成可测量的量而非定性观察）。</p>
 
           <div class="sub-title">3. 实验稳健性</div>
-          <p>当前每个模型只跑 5 次、只有一种任务，结论置信区间较宽。更隐蔽的问题是格式 confound：system prompt 要求输出必须以 <code>TOOL:</code> 或
-            <code>FINAL:</code> 开头，与 Reason 模型先输出内部推理链的原生格式直接冲突。DS-V3.2 Reason
-            的低完成率中，有多少是能力问题、有多少是格式适配问题，现有数据无法区分。后续若要认真回答"Chat vs Reason 哪个更适合 agent 场景"，需要有针对 Reason 模型格式约束的对照实验。
-          </p>
+          <p>当前每个模型只跑 5 次、只有一种任务，结论置信区间较宽。增加样本量和任务多样性是基础要求。更隐蔽的问题是格式 confound：system prompt 要求输出必须以 <code>TOOL:</code> 或 <code>FINAL:</code> 开头，与 Reason 模型先输出内部推理链的原生格式直接冲突。DS-V3.2 Reason 的低完成率中，有多少是能力问题、有多少是格式适配问题，现有数据无法区分。后续若要认真回答"Chat vs Reason 哪个更适合 agent 场景"，需要有针对 Reason 模型格式约束的对照实验。</p>
 
         </div>
       </section>
@@ -1088,7 +627,7 @@
       <div class="section-divider fade-in"></div>
 
       <!-- ═══════ 项目二：MCP 召回评估 ═══════ -->
-      <section class="project-section fade-in" id="project-2">
+      <section id="p2" class="project-section fade-in">
 
         <div class="project-header">
           <div class="project-number">Project 02</div>
@@ -1103,9 +642,8 @@
 
         <div class="article-body">
 
-          <h3 class="section-title" id="p2-bg">问题背景</h3>
-          <p>MCP（Model Context Protocol）的链路很长，从用户输入 query 到最终输出，要经过意图识别、工具排序、任务规划、搜索阅读、工具选择、Server 执行、内容生成共 7
-            个阶段，任何一个环节出问题都可能导致 MCP 未召回或召回不准。</p>
+          <h3 id="p2-s1" class="section-title">问题背景</h3>
+          <p>MCP（Model Context Protocol）的链路很长，从用户输入 query 到最终输出，要经过意图识别、工具排序、任务规划、搜索阅读、工具选择、Server 执行、内容生成共 7 个阶段，任何一个环节出问题都可能导致 MCP 未召回或召回不准。</p>
           <p>策略侧已经有了自动剖析工具，但产品侧的召回评估仍然纯手动——每次拿到几百个 query，需要逐一打开网页、点击 debug 模块、查看 debugkey、人工判断召回情况。一轮评估耗时数小时。</p>
 
           <div class="fig">
@@ -1115,14 +653,11 @@
             <div class="fig-caption">手动逐条查看 debug 的操作界面</div>
           </div>
 
-          <h3 class="section-title" id="p2-method">我的做法：通过了解MCP整体链路机制，精确指导agent定位debug日志关键字段</h3>
+          <h3 id="p2-s2" class="section-title">我的做法：通过了解MCP整体链路机制，精确指导agent定位debug日志关键字段</h3>
           <p>一份 debug 日志记录了全链路所有阶段的完整信息，通常有 5-10 万行代码。直接让 agent 去"分析这份日志，告诉我 MCP 的调用和挂载情况"是行不通的——它会在海量字段中迷失，反复试错。</p>
-          <p>我的做法是先告诉 agent 我们内部MCP整体的链路流程，让 agent 理解全链路各模块的输入输出关系，从而能快速精确定位代码关键部位，通过精准定位+我喂的多个实例，agent 最终定位到两个关键判定点：
-          </p>
-          <p><strong>判定点一：调用 MCP。</strong>对应 Tool Decision 阶段的输出，看 <code>step0_decision</code> 的 <code>status</code>
-            字段和最终汇总的 <code>server_names</code> 字段。</p>
-          <p><strong>判定点二：挂载 MCP。</strong>判断 MCP 结果是否最终出现在用户看到的回答中。需要检查 Generator 输出的 <code>all_answer</code> 中是否存在 MCP
-            引用标记，同时还要检查是否有独立前端组件渲染（如医生卡片），因为 MCP 数据有文本引用和组件渲染两个通道。</p>
+          <p>我的做法是先告诉 agent 我们内部MCP整体的链路流程，让 agent 理解全链路各模块的输入输出关系，从而能快速精确定位代码关键部位，通过精准定位+我喂的多个实例，agent 最终定位到两个关键判定点：</p>
+          <p><strong>判定点一：调用 MCP。</strong>对应 Tool Decision 阶段的输出，看 <code>step0_decision</code> 的 <code>status</code> 字段和最终汇总的 <code>server_names</code> 字段。</p>
+          <p><strong>判定点二：挂载 MCP。</strong>判断 MCP 结果是否最终出现在用户看到的回答中。需要检查 Generator 输出的 <code>all_answer</code> 中是否存在 MCP 引用标记，同时还要检查是否有独立前端组件渲染（如医生卡片），因为 MCP 数据有文本引用和组件渲染两个通道。</p>
 
           <div class="fig">
             <div class="fig-img-wrapper">
@@ -1131,13 +666,11 @@
             <div class="fig-caption">MCP 全链路简图，标注"调用 MCP"和"挂载 MCP"两个判定点</div>
           </div>
 
-          <p>有了这两个精确的判定规则后，Claude Code 按照这个方向，两三轮迭代就写出了 100% 逻辑正确的判别代码。</p>
-          <p>这就是我在人机协作中总结的"熵减原则"：人负责把 agent 的搜索空间从 5 万行代码压缩到几个关键部分，agent
-            负责在精确范围内高效执行。在极长上下文、复杂任务下，agent自由探索容易迷失方向，需要人精准指导+及时纠偏。</p>
+          <p>有了这两个精确的判定规则后，Claude code 按照这个方向，两三轮迭代就写出了 100% 逻辑正确的判别代码。</p>
+          <p>这就是我在人机协作中总结的"熵减原则"：人负责把 agent 的搜索空间从 5 万行代码压缩到几个关键部分，agent 负责在精确范围内高效执行。在极长上下文、复杂任务下，agent自由探索容易迷失方向，需要人精准指导+及时纠偏。</p>
 
-          <h3 class="section-title" id="p2-result">成果</h3>
-          <p>指导 Claude Code 写出一套可复用的 skill 体系后，批量分析效率实现质的飞跃：346 个 query，20 并发，21.5
-            秒内完成全部分析，输出结构化评估报告，直接可用于产品决策。相比之前手动逐条查看，效率提升约 600 倍。</p>
+          <h3 id="p2-s3" class="section-title">成果</h3>
+          <p>指导 Claude Code 写出一套可复用的 skill 体系后，批量分析效率实现质的飞跃：346 个 query，20 并发，21.5 秒内完成全部分析，输出结构化评估报告，直接可用于产品决策。相比之前手动逐条查看，效率提升约 600 倍。</p>
 
           <div class="fig">
             <div class="fig-img-wrapper">
@@ -1156,9 +689,6 @@
         </div>
       </section>
 
-      <div class="section-divider fade-in"></div>
-
-
       <footer class="footer fade-in">
         <div class="footer-left">© 2026 林诗剑 · 用好奇心驱动</div>
         <div class="footer-links">
@@ -1167,8 +697,8 @@
         </div>
       </footer>
 
-    </div><!-- /main-content -->
-  </div><!-- /page-layout -->
+    </div>
+  </div>
 
   <!-- Lightbox -->
   <div class="lightbox" id="lightbox">
@@ -1177,12 +707,12 @@
   </div>
 
   <script>
-    // ===== Sidebar toggle (mobile) =====
+    // ── Sidebar toggle (mobile) ──
     const sidebar = document.getElementById('sidebar');
-    const menuToggle = document.getElementById('menuToggle');
+    const toggle = document.getElementById('sidebarToggle');
     const overlay = document.getElementById('sidebarOverlay');
 
-    menuToggle.addEventListener('click', () => {
+    toggle.addEventListener('click', () => {
       sidebar.classList.toggle('open');
       overlay.classList.toggle('open');
     });
@@ -1191,72 +721,65 @@
       overlay.classList.remove('open');
     });
 
-    // Close sidebar on nav click (mobile)
-    sidebar.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', () => {
+    // ── Nav group expand/collapse ──
+    document.querySelectorAll('.nav-group-title').forEach(title => {
+      title.addEventListener('click', (e) => {
+        e.preventDefault();
+        const group = title.parentElement;
+        group.classList.toggle('open');
+        const href = title.getAttribute('href');
+        if (href && href !== '#') {
+          const target = document.querySelector(href);
+          if (target) {
+            setTimeout(() => {
+              target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 50);
+          }
+        }
         if (window.innerWidth <= 900) {
           sidebar.classList.remove('open');
           overlay.classList.remove('open');
         }
-        // Lock scroll spy during navigation jump
-        scrollSpyLocked = true;
-        setTimeout(() => { scrollSpyLocked = false; updateActiveNav(); }, 800);
       });
     });
 
-    // ===== Nav group expand/collapse =====
-    document.querySelectorAll('.nav-l1').forEach(l1 => {
-      l1.addEventListener('click', (e) => {
-        const group = l1.closest('.nav-group');
-        // Toggle this group
-        document.querySelectorAll('.nav-group').forEach(g => {
-          if (g !== group) g.classList.remove('open');
-        });
-        group.classList.add('open'); // 改为 add，点击项目标题时始终展开，不要 toggle
+    document.querySelectorAll('.nav-child').forEach(link => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth <= 900) {
+          sidebar.classList.remove('open');
+          overlay.classList.remove('open');
+        }
       });
     });
 
-    // ===== Scroll spy for sidebar highlight =====
-    let scrollSpyLocked = false;
-    const sections = document.querySelectorAll('[id^="p1-"], [id^="p2-"], [id^="p3-"], [id^="project-"]');
-    const navLinks = document.querySelectorAll('.nav-l1, .nav-l2');
+    // ── Active nav highlight on scroll ──
+    const sections = document.querySelectorAll('[id^="p1"], [id^="p2"]');
+    const navChildren = document.querySelectorAll('.nav-child');
+    const navGroupTitles = document.querySelectorAll('.nav-group-title');
 
     function updateActiveNav() {
-      if (scrollSpyLocked) return;
       let current = '';
-      let minDistance = Infinity;
-      const target = window.scrollY + 150;
-
-      sections.forEach(section => {
-        const distance = Math.abs(section.offsetTop - target);
-        if (distance < minDistance) {
-          minDistance = distance;
-          current = section.id;
-        }
+      sections.forEach(sec => {
+        const top = sec.getBoundingClientRect().top;
+        if (top <= 120) current = sec.id;
       });
 
-      navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === '#' + current) {
-          link.classList.add('active');
-        }
+      navChildren.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+      });
+
+      const groupId = current ? current.split('-')[0] : '';
+      navGroupTitles.forEach(t => {
+        t.classList.toggle('active', t.getAttribute('href') === '#' + groupId);
       });
     }
+    window.addEventListener('scroll', updateActiveNav, { passive: true });
 
-    let scrollTicking = false;
-    window.addEventListener('scroll', () => {
-      if (!scrollTicking) {
-        requestAnimationFrame(() => { updateActiveNav(); scrollTicking = false; });
-        scrollTicking = true;
-      }
-    });
-    scrollSpyLocked = true;
-
-    // ===== Image loading states =====
+    // ── Image loading states ──
     document.querySelectorAll('.fig-img-wrapper').forEach(wrapper => {
       const img = wrapper.querySelector('img');
-      img.addEventListener('load', () => { wrapper.classList.add('loaded'); });
-      img.addEventListener('error', () => { wrapper.classList.add('error'); });
+      img.addEventListener('load', () => wrapper.classList.add('loaded'));
+      img.addEventListener('error', () => wrapper.classList.add('error'));
       wrapper.addEventListener('click', () => {
         if (wrapper.classList.contains('error')) {
           wrapper.classList.remove('error');
@@ -1265,13 +788,12 @@
           img.src = src + (src.includes('?') ? '&' : '?') + 't=' + Date.now();
         }
       });
-      if (img.complete && img.naturalWidth > 0) { wrapper.classList.add('loaded'); }
+      if (img.complete && img.naturalWidth > 0) wrapper.classList.add('loaded');
     });
 
-    // ===== Lightbox =====
+    // ── Lightbox ──
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = lightbox.querySelector('img');
-
     document.querySelectorAll('.fig img').forEach(img => {
       img.style.cursor = 'zoom-in';
       img.addEventListener('click', () => {
@@ -1281,7 +803,6 @@
         }
       });
     });
-
     lightbox.addEventListener('click', e => {
       if (e.target !== lightboxImg) lightbox.classList.remove('open');
     });
@@ -1289,18 +810,16 @@
       if (e.key === 'Escape') lightbox.classList.remove('open');
     });
 
-    // ===== Scroll Fade-in =====
+    // ── Scroll fade-in ──
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) entry.target.classList.add('visible');
       });
     }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
     document.querySelectorAll('.fade-in').forEach((el, i) => {
       el.style.transitionDelay = `${i * 0.07}s`;
       observer.observe(el);
     });
   </script>
 </body>
-
 </html>
