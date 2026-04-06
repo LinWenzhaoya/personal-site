@@ -858,14 +858,6 @@
         </ul>
       </div>
 
-      <div class="nav-group" data-project="p3">
-        <a class="nav-l1" href="#project-3">Coding Agent Runtime 设计拆解与原型验证</a>
-        <ul class="nav-l2-list">
-          <li><a class="nav-l2" href="#p3-arch">Agent 原型架构</a></li>
-          <li><a class="nav-l2" href="#p3-exp1">实验一：上下文治理</a></li>
-          <li><a class="nav-l2" href="#p3-exp2">实验二：工具过滤</a></li>
-        </ul>
-      </div>
     </nav>
 
     <!-- ===== Main Content ===== -->
@@ -895,7 +887,7 @@
           <p class="project-oneliner">搭建最小化 Coding Agent，接入五个模型在同一 bug 修复任务上进行能力评测</p>
           <div class="tech-tags">
             <span class="tech-tag">Benchmark</span>
-            <span class="tech-tag">Opus 4.6</span>
+            <span class="tech-tag">Claude Opus 4.6</span>
             <span class="tech-tag">DeepSeek-V3.2</span>
             <span class="tech-tag">GPT 5.4</span>
             <span class="tech-tag">GLM-5</span>
@@ -1039,25 +1031,25 @@
             </thead>
             <tbody>
               <tr>
-                <td><strong>探索策略失误</strong></td>
+                <td><strong>A. 探索策略失误</strong></td>
                 <td>推理和工具正常，但读取策略不当导致错过信息或步数耗尽</td>
                 <td>Opus Run 2、DS Chat Run 3</td>
                 <td>repo navigation 策略数据</td>
               </tr>
               <tr>
-                <td><strong>行为范式错位</strong></td>
+                <td><strong>B. 行为范式错位</strong></td>
                 <td>诊断正确，知道自己没修复，但主动等待用户确认</td>
                 <td>GPT 5.4 全部 run</td>
                 <td>"诊断→直接执行"的 agent trajectory 数据</td>
               </tr>
               <tr>
-                <td><strong>执行幻觉</strong></td>
+                <td><strong>C. 执行幻觉</strong></td>
                 <td>诊断正确，声称已修复但实际未调用 write_patch</td>
                 <td>DS Reason Run 1/3/4/5</td>
                 <td>tool call 序列化训练，强化"想 ≠ 做"的边界</td>
               </tr>
               <tr>
-                <td><strong>工具幻觉</strong></td>
+                <td><strong>D. 工具幻觉</strong></td>
                 <td>参数注入垃圾内容，上下文膨胀/编造结果/系统崩溃</td>
                 <td>GLM5 Run 1/3/5</td>
                 <td>schema adherence 数据，参数约束反例</td>
@@ -1166,245 +1158,6 @@
 
       <div class="section-divider fade-in"></div>
 
-      <!-- ═══════ 项目三：Agent 实验（原项目一） ═══════ -->
-      <section class="project-section fade-in" id="project-3">
-
-        <div class="project-header">
-          <div class="project-number">Project 03</div>
-          <h2>Coding Agent Runtime 设计拆解与原型验证</h2>
-          <p class="project-oneliner">搭建最小 agent 原型，通过 A/B 实验验证上下文治理和工具过滤对 agent 决策质量的影响。</p>
-          <div class="tech-tags">
-            <span class="tech-tag">Claude Code</span>
-            <span class="tech-tag">Kimi API</span>
-            <span class="tech-tag">A/B Testing</span>
-          </div>
-          <div class="project-actions">
-            <a class="github-btn" href="https://github.com/LinWenzhaoya/claude-code-agent-" target="_blank"
-              rel="noopener noreferrer">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path
-                  d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
-              </svg>
-              查看源码
-            </a>
-          </div>
-        </div>
-
-        <div class="article-body">
-
-          <h3 class="section-title" id="p3-arch">Agent 原型架构</h3>
-
-          <div class="fig">
-            <div class="fig-img-wrapper">
-              <img src="./portfolio/p1-1.png" alt="Agent 原型架构图" loading="lazy">
-            </div>
-            <div class="fig-caption">Agent 原型架构总览</div>
-          </div>
-
-          <p>搭建了一个最小的 Claude Code 风格 agent 原型，包含 7 个核心文件：</p>
-          <ul>
-            <li><strong>agent.py</strong> — Tool Loop 主循环：循环调用模型→解析决策→执行工具→追加结果→检查压缩</li>
-            <li><strong>context_manager.py</strong> — 上下文治理：字符数估算、历史压缩（保留 system + 最近 N 条 + 中间压缩成 summary）、长输出外存化</li>
-            <li><strong>tools.py</strong> — 工具系统：6
-              个工具（list_dir、search_code、read_file、write_patch、run_command、save_note），路径沙箱、命令白名单、输出截断</li>
-            <li><strong>models.py</strong> — 模型客户端：接 Kimi API，负责决策和历史摘要</li>
-            <li><strong>prompts.py</strong> — Prompt 构建：system prompt + agent prompt（含 task、notes、history、step info）
-            </li>
-            <li><strong>notes.py</strong> — 工作笔记管理</li>
-            <li><strong>agent_types.py</strong> — 统一数据结构</li>
-          </ul>
-          <p>Workspace 测试项目包含多个文件（config.py、db.py、utils.py、auth.py、services.py、routes.py、test_all.py），构成一个用户管理系统，其中埋有跨文件
-            bug 用于实验验证。</p>
-
-          <h3 class="section-title" id="p3-exp1">实验一：上下文治理对 agent 行为的影响</h3>
-
-          <div class="desc-label">背景与目标</div>
-          <p>在研究 Claude Code、Codex CLI、OpenClaw 三个 agent 产品的 runtime 架构后，我形成了一个核心判断：<strong>上下文治理的本质不是省
-              token，而是注意力管理</strong>——当 messages 堆积了大量历史信息时，模型无法有效地从中提取有用信号，导致决策质量下降。为了验证这个判断，我设计了一组 A/B 对比实验。</p>
-
-          <div class="desc-label">实验设计</div>
-          <p>在 workspace 中埋了一个跨文件的 bug：utils.py 的 <code>generate_token</code> 函数从返回字符串重构为返回字典，但 auth.py 还在按旧方式做字符串拼接，导致
-            TypeError。Agent 需要从测试失败出发，跨 2-3 个文件追踪定位并修复。</p>
-          <p>实验分为两组，每组跑 3 次：A 组开启上下文压缩（compression=ON），B 组关闭压缩让 messages 无限堆积（compression=OFF）。两组使用完全相同的任务指令、workspace
-            初始状态和模型配置（moonshot-v1-8k），唯一的变量是压缩是否开启。每次运行前通过 reset 脚本恢复 workspace 到有 bug 的原始状态，确保起点一致。</p>
-
-          <div class="desc-label">实验结果</div>
-
-          <div class="fig">
-            <div class="fig-img-wrapper">
-              <img src="./portfolio/p1-2.png" alt="实验一 A/B 对比结果汇总" loading="lazy">
-            </div>
-            <div class="fig-caption">实验一 A/B 对比结果汇总</div>
-          </div>
-
-          <p><strong>compression=ON 组</strong>：3 次中 2 次成功（分别 7 步和 9 步），1
-            次失败但走了不同的探索路径。成功的两次表现出清晰的链路：跑测试→搜索关键词→读报错指向的文件→读调用链相关文件→写 patch→跑测试验证通过。</p>
-          <p><strong>compression=OFF 组</strong>：3 次全部失败，全部耗尽 20 步上限。最显著的现象是 agent 陷入"死循环"——OFF-3 中，20 步里有 18 步在重复几乎相同的
-            write_patch 调用，每次都返回 "Snippet not found"，但 agent 从未调整策略。</p>
-
-          <div class="desc-label">Trace 对比</div>
-
-          <div class="fig-group">
-            <div class="fig-group-label">OFF-3 的死循环 trace（20 步耗尽，完全陷入 write_patch 死循环）</div>
-            <div class="fig">
-              <div class="fig-img-wrapper">
-                <img src="./portfolio/p1-3.png" alt="OFF-3 trace 截图1" loading="lazy">
-              </div>
-              <div class="fig-caption">OFF-3 trace（上）</div>
-            </div>
-            <div class="fig">
-              <div class="fig-img-wrapper">
-                <img src="./portfolio/p1-4.png" alt="OFF-3 trace 截图2" loading="lazy">
-              </div>
-              <div class="fig-caption">OFF-3 trace（下）</div>
-            </div>
-          </div>
-
-          <div class="fig-group">
-            <div class="fig-group-label">ON-1 成功的 trace（7 步干净利落完成任务）</div>
-            <div class="fig">
-              <div class="fig-img-wrapper">
-                <img src="./portfolio/p1-5.png" alt="ON-1 trace 截图1" loading="lazy">
-              </div>
-              <div class="fig-caption">ON-1 trace（上）</div>
-            </div>
-            <div class="fig">
-              <div class="fig-img-wrapper">
-                <img src="./portfolio/p1-6.png" alt="ON-1 trace 截图2" loading="lazy">
-              </div>
-              <div class="fig-caption">ON-1 trace（下）</div>
-            </div>
-          </div>
-
-          <div class="desc-label">分析与结论</div>
-          <p>OFF 组的死循环现象直接验证了核心判断。Agent 并非"看不到"之前的失败记录——这些记录确实在 messages 里。问题是 messages
-            不断膨胀，大量重复的失败记录稀释了有效信息的密度，模型的注意力被淹没，失去了"退一步换个策略"的能力。ON 组通过压缩清理了旧的、重复的信息，让模型在每一步都能聚焦于当前最关键的状态。</p>
-          <p>同时，ON-3 的失败也说明了一个边界条件：<strong>上下文治理是必要条件但不是充分条件。</strong>如果模型一开始就走错了方向，压缩再好也无法纠正推理错误。Harness
-            负责创造条件让模型发挥，但不能替代模型自身的判断力。</p>
-
-          <h3 class="section-title" id="p3-exp2">实验二：工具过滤对 agent 决策质量的影响</h3>
-
-          <div class="desc-label">背景与目标</div>
-          <p>第二个核心判断是：<strong>工具不只是功能按钮，而是环境过滤器</strong>——每个工具都在帮模型从混乱的原始环境中提取与任务相关的信息切片，过滤掉噪音。为了验证，我设计了 search_code
-            在过滤模式和无过滤模式下的 A/B 对比实验。</p>
-
-          <div class="desc-label">实验设计</div>
-          <p>在 auth.py 和 utils.py 之间增加中间层 services.py，auth.py 需要调用 services.py 的 <code>create_session</code>。Services.py
-            从 4 个文件 import 了 10 个函数，agent 看 import 语句不能一眼判断问题出在哪个函数。Traceback 指向 services.py 第 32
-            行（<code>token.encode("utf-8")</code> 失败），agent 需要追踪 token 的来源，经过 services.py → utils.py 才能找到根因。同时 workspace
-            中"token"关键词的搜索命中量达到 106 条（7 个文件）。</p>
-          <p>给 <code>search_code</code> 加了过滤模式开关：filtered 模式只返回前 5 条，unfiltered 模式全量返回最多 100 条。实验保持 compression=ON 不变，只改
-            search_filter_mode。分别使用 moonshot-v1-8k 和 kimi-k2.5 两个模型，每组各跑 3 次。</p>
-
-          <div class="sub-title">moonshot-v1-8k 结果</div>
-
-          <div class="fig">
-            <div class="fig-img-wrapper">
-              <img src="./portfolio/p1-7.png" alt="moonshot 实验二结果表格" loading="lazy">
-            </div>
-            <div class="fig-caption">moonshot-v1-8k 实验二结果汇总</div>
-          </div>
-
-          <p>filtered 组 1/3 成功（filtered_run3，17 步完成），另外 2 次耗尽 20 步失败。unfiltered 组同样 1/3 成功（unfiltered_run2，14 步完成），另外 2
-            次失败。两组成功率均为 1/3，无显著差异。但原因不是搜索过滤没效果，而是 <strong>write_patch 成了共同瓶颈</strong>——agent 能在前 3-4 步快速定位 bug，但写 patch
-            时因 snippet 文本匹配问题反复失败，耗尽步数。</p>
-
-          <div class="sub-title">kimi-k2.5 结果</div>
-
-          <div class="fig">
-            <div class="fig-img-wrapper">
-              <img src="./portfolio/p1-8.png" alt="kimi-k2.5 实验二结果表格" loading="lazy">
-            </div>
-            <div class="fig-caption">kimi-k2.5 实验二结果汇总</div>
-          </div>
-
-          <p>filtered 组 3/3 全部成功（平均 9 步）。unfiltered 组 2/3 成功，1 次出现严重幻觉——unfiltered_run2 中，第 2 步 read_file 失败后收到 38,536
-            chars 的异常数据涌入 messages，模型随即产生幻觉，声称已修复 bug 并给出详细"修复方案"，但实际上没有执行任何 write_patch，workspace 里的代码完全没被改动。</p>
-
-          <div class="sub-title">跨模型横向对比</div>
-
-          <table class="article-table">
-            <thead>
-              <tr>
-                <th>指标</th>
-                <th>moonshot filtered</th>
-                <th>moonshot unfiltered</th>
-                <th>k2.5 filtered</th>
-                <th>k2.5 unfiltered</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>真实成功率</td>
-                <td>1/3</td>
-                <td>1/3</td>
-                <td><strong>3/3</strong></td>
-                <td>2/3</td>
-              </tr>
-              <tr>
-                <td>平均步数</td>
-                <td>19.0</td>
-                <td>18.0</td>
-                <td>9.0</td>
-                <td>5.3</td>
-              </tr>
-              <tr>
-                <td>主要失败原因</td>
-                <td>write_patch 循环</td>
-                <td>write_patch 循环</td>
-                <td>无</td>
-                <td>幻觉</td>
-              </tr>
-            </tbody>
-          </table>
-
-          <div class="desc-label">Trace 对比</div>
-
-          <div class="fig-group">
-            <div class="fig-group-label">kimi-k2.5 filtered 组 trace（稳定完成，步骤清晰）</div>
-            <div class="fig">
-              <div class="fig-img-wrapper">
-                <img src="./portfolio/p1-9.png" alt="filtered 组 trace 截图1" loading="lazy">
-              </div>
-              <div class="fig-caption">filtered 组 trace（上）</div>
-            </div>
-            <div class="fig">
-              <div class="fig-img-wrapper">
-                <img src="./portfolio/p1-10.png" alt="filtered 组 trace 截图2" loading="lazy">
-              </div>
-              <div class="fig-caption">filtered 组 trace（下）</div>
-            </div>
-          </div>
-
-          <div class="fig-group">
-            <div class="fig-group-label">kimi-k2.5 unfiltered_run2 的幻觉 trace（信息过载后模型迷失）</div>
-            <div class="fig">
-              <div class="fig-img-wrapper">
-                <img src="./portfolio/p1-11.png" alt="unfiltered_run2 trace 截图1" loading="lazy">
-              </div>
-              <div class="fig-caption">unfiltered_run2 幻觉 trace（上）</div>
-            </div>
-            <div class="fig">
-              <div class="fig-img-wrapper">
-                <img src="./portfolio/p1-12.png" alt="unfiltered_run2 trace 截图2" loading="lazy">
-              </div>
-              <div class="fig-caption">unfiltered_run2 幻觉 trace（下）</div>
-            </div>
-          </div>
-
-          <div class="desc-label">分析与结论</div>
-          <p>改进版实验二部分支持了"工具是过滤器"的判断。kimi-k2.5 的 filtered 组 100% 成功，unfiltered 组出现了信息过载引发的幻觉，平均峰值 context 达到 23,512
-            chars，比 filtered 组的 16,857 chars 高出 39%，幻觉那次更是达到 38,536 chars。<strong>不受控的信息涌入增加了模型产生幻觉的风险。</strong></p>
-          <p>但需要诚实地说明局限性：样本量较小（每组 3 次），kimi-k2.5 的幻觉只出现了 1 次，不能说"unfiltered 一定会导致幻觉"，只能说"增加了风险"。moonshot 两组都卡在
-            write_patch 的基础能力瓶颈上，搜索过滤的差异没有机会体现。</p>
-          <p>结合两版实验和跨模型对比，一个更完整的认知浮现出来：<strong>模型能力和 harness
-              复杂度之间是跷跷板关系，而且影响体现在不同层面。</strong>弱模型的瓶颈在基础工具使用能力（write_patch 的 snippet 匹配），harness
-            层的信息过滤还排不上优先级。强模型解决了基础能力问题后，信息过滤的价值才开始显现——unfiltered 的信息过载会增加幻觉风险。这说明 harness
-            设计需要根据模型能力分层：先保证基础工具可用性，再优化信息过滤策略。Claude Code 之所以能用极简 harness，正是因为强模型已经跨过了基础能力门槛，harness 只需要在信息管理层做好工作就够了。
-          </p>
-
-        </div>
-      </section>
 
       <footer class="footer fade-in">
         <div class="footer-left">© 2026 林诗剑 · 用好奇心驱动</div>
