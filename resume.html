@@ -204,7 +204,7 @@
     <span>2026.04</span>
   </div>
   <div class="content-block">
-    <p><span class="tag">【背景】</span>自主搭建了 Claude Code 风格的 Coding Agent 原型（含完整 tool loop、上下文压缩、trace 记录系统），在此基础上设计评测框架，接入 Claude Opus 4.6、DS-V3.2 Chat/Reason、GLM5-Turbo、GPT 5.4 五个模型，针对同一 bug 修复任务对比其自主编程能力。其中 DS-V3.2 同底座分别测试 Chat 与 Reason 版本，验证"推理能力更强是否意味着 Agent 表现更好"。</p>
+    <p><span class="tag">【背景】</span>自主搭建了 Claude Code 风格的 Coding Agent 原型（含完整 tool loop、上下文压缩、trace 记录系统等），在此基础上设计评测框架，接入 Claude Opus 4.6、DS-V3.2 Chat/Reason、GLM5-Turbo、GPT 5.4 五个模型，针对同一 bug 修复任务对比其自主编程能力。其中 DS-V3.2 同底座分别测试 Chat 与 Reason 版本，验证"推理能力更强是否意味着 Agent 表现更好"。</p>
     <p><span class="tag">【方案】</span>任务设计：构造跨模块共享状态污染 bug——routes.py 篡改全局时间戳后未恢复，导致 auth.py 误判 token 过期。表面 traceback 指向 auth.py 但其逻辑完全正确，Agent 必须跳出当前文件、理解共享状态被外部篡改，才能跨文件追到根因。实验设计：所有模型共享相同 system prompt、工具定义、上下文压缩策略和步数上限，每模型跑 5 次取分布，通过 trace 分析行为差异。</p>
     <p><span class="tag">【结果】</span>核心发现——Agent 能力 ≠ 推理能力：DS-V3.2 Reason 诊断正确率 100% 但任务完成率仅 20%，同底座 Chat 版完成率 80%，推理增强未自动转化为更高任务完成率。归纳出四类典型失败模式并对应模型优化方向：探索策略失误（repo navigation 策略数据）、行为范式错位——诊断正确但等待用户确认而非自主执行（agent trajectory 数据）、执行幻觉——声称已修复但未实际调用工具（tool call 序列化训练）、工具参数幻觉——参数注入垃圾内容致上下文膨胀崩溃（schema adherence 数据）。</p>
     <p><span class="tag">【评测体系优化思路】</span>当前 benchmark 能打分但还不能精准指导模型训练。指标层面：成功率+步数过粗，无法捕捉 overthinking 等效率问题——Opus 与 DS Chat 成功率并列但步数差 1.6 倍，DS Chat 反复重读文件"建立信心"的行为在现有指标下无感知，提出 token 成本效率、首次正确调用步数两个补充指标方向，使评测结果能细化到训练优先级判断。任务层面：当前单跳污染链下诊断正确率普遍偏高，区分度已不足，需扩展至多跳推理链以压力测试失败模式分类框架的泛化性。</p>
