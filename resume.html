@@ -200,14 +200,14 @@
 
 <div class="exp-block">
   <div class="row-header">
-    <span>Agent Benchmark 评测体系设计与多模型能力诊断</span>
+    <span>基于自研 Coding Agent 的多模型 Benchmark 实验与能力诊断</span>
     <span>2026.04</span>
   </div>
   <div class="content-block">
-    <p><span class="tag">【背景】</span>自主搭建了 Claude Code 风格的 Coding Agent 原型（含完整 tool loop、上下文压缩、trace 记录系统等），在此基础上设计评测框架，接入 Claude Opus 4.6、DS-V3.2 Chat/Reason、GLM5-Turbo、GPT 5.4 五个模型，针对同一 bug 修复任务对比其自主编程能力。其中 DS-V3.2 同底座分别测试 Chat 与 Reason 版本，验证"推理能力更强是否意味着 Agent 表现更好"。</p>
-    <p><span class="tag">【方案】</span>任务设计：构造跨模块共享状态污染 bug——routes.py 篡改全局时间戳后未恢复，导致 auth.py 误判 token 过期。表面 traceback 指向 auth.py 但其逻辑完全正确，Agent 必须跳出当前文件、理解共享状态被外部篡改，才能跨文件追到根因。实验设计：所有模型共享相同 system prompt、工具定义、上下文压缩策略和步数上限，每模型跑 5 次取分布，通过 trace 分析行为差异。</p>
-    <p><span class="tag">【结果】</span>核心发现——Agent 能力 ≠ 推理能力：DS-V3.2 Reason 诊断正确率 100% 但任务完成率仅 20%，同底座 Chat 版完成率 80%，推理增强未自动转化为更高任务完成率。归纳出四类典型失败模式并对应模型优化方向：探索策略失误（repo navigation 策略数据）、行为范式错位——诊断正确但等待用户确认而非自主执行（agent trajectory 数据）、执行幻觉——声称已修复但未实际调用工具（tool call 序列化训练）、工具参数幻觉——参数注入垃圾内容致上下文膨胀崩溃（schema adherence 数据）。</p>
-    <p><span class="tag">【评测体系优化思路】</span>当前 benchmark 能打分但还不能精准指导模型训练。指标层面：成功率+步数过粗，无法捕捉 overthinking 等效率问题——Opus 与 DS Chat 成功率并列但步数差 1.6 倍，DS Chat 反复重读文件"建立信心"的行为在现有指标下无感知，提出 token 成本效率、首次正确调用步数两个补充指标方向，使评测结果能细化到训练优先级判断。任务层面：当前单跳污染链下诊断正确率普遍偏高，区分度已不足，需扩展至多跳推理链以压力测试失败模式分类框架的泛化性。</p>
+    <p><span class="tag">【背景】</span>自主搭建了claude code风格的coding agent原型（含完整tool loop、上下文压缩、trace记录系统），设计评测框架，接入opus4.6，Deepseek-V3.2等五个模型，在同一跨文件bug修复任务上对比其自主编程能力。任务核心难点在于报错文件本身逻辑正确，根因藏在另一个文件的共享状态污染中，agent必须主动跳出当前文件追溯污染源头。五个模型各跑五轮，通过trace记录分析任务完成情况。</p>
+    <p><span class="tag">【核心发现1：推理能力强 ≠ Agent 能力强】</span>DS-V3.2 同底座 Chat 与 Reason 版本，诊断正确率均为5/5，但 Chat 任务完成率 4/5，Reason 仅 2/5。原因是Reason模型工具格式遵循频频出错，将写文件的参数放置在调用读取文件工具的参数中，导致工具调用频频失败，且模型自身由于推理链过长，输入被污染，模型未意识到调用失败，反而以为自己已修复任务，直接宣布任务完成。而Chat 在相同 harness 下零格式错误，任务完成出色。</p>
+    <p><span class="tag">【核心发现2：部分模型严重缺失任务执行意愿】</span>GPT 5.4  诊断正确率4/5，但写文件工具调用零次，每次都在等用户确认——把自己定位成顾问而非执行者。这是对话场景下的行为模式被带入了 Agent 场景，在需要自主执行的 Agent 场景下，模型无法胜任工作。</p>
+    <p><span class="tag">【四类失败模式归纳】</span>综合五大模型表现，归纳出四类典型失败：工具格式遵循失败、执行意愿缺失、探索策略失误（如 Opus 碎片化读取恰好错过关键代码行，随后在错误方向上浪费多步）、整体性幻觉（如GLM凭空编造bug和修复过程）。每类失败指向不同的模型能力短板，并据此提出对应的评测指标优化方向。</p>
   </div>
   </div>
 </div>
@@ -219,30 +219,30 @@
   <div class="row-header">
     <span>百度 | 文心助手</span>
     <span>AI产品经理实习生（MCP方向）</span>
-    <span>2025.10 ~ 2026.04</span>
+    <span>2025.11 ~ 2026.04</span>
   </div>
+
+  <p><span class="tag">【整体背景】</span>文心助手是百度的Chatbot产品（DAU约900w），通过MCP协议接入80+外部服务（医疗、电商、本地生活等）。Pipeline采用多级漏斗架构实现工具动态路由——轻量模型做意图识别、排序服务做候选筛选、规划模型做任务分配、决策模型做最终工具选择与参数填充，将工具调用结果以组件形式嵌入回答。</p>
 
   <div class="module-title">模块一：利用Claude Code创建MCP召回评估自动化skill</div>
   <div class="content-block">
-    <p><span class="tag">【问题】</span>产品侧每周需例行评估MCP召回情况，由于存在众多MCP且每个MCP需评超过50个query，目前评估为纯手动流程——数百条query需逐一查看label页面并人工判断，效率极低。</p>
-    <p><span class="tag">【方案】</span>基于对MCP调用链路各阶段的理解，明确debug日志中各环节关键判别字段，设计自动化路径：批量获取debugkey → 自动抓取解析debug信息 → 输出结构化评估报告。向Claude Code明确各阶段判别逻辑，结合典型case校准边界条件，经2-3轮纠偏后判别逻辑达到100%正确，为提速评估效率，引入20线程高并发方案，整套流程沉淀为可复用skill。</p>
-    <p><span class="tag">【结果】</span>评估效率从手动逐条提升至500 query/min。</p>
+    <p><span class="tag">【背景】</span>产品侧每周需例行评估MCP召回情况，现阶段存在众多MCP工具且单MCP工具需评估超50个query，评估为纯手动流程——数百条query需逐一查看label页面人工判别召回情况，评估效率低下，并影响召回优化节奏。</p>
+    <p><span class="tag">【方案】</span>基于对MCP调用链路各阶段的理解，向agent明确debug日志各环节关键判别字段，并设计自动化评估路径：批量获取debugkey→ 自动抓取解析debug信息 → 使用判别规则脚本批量识别召回情况，最终与agent协同开发自动化评估工具，并引入20线程并发加速评估效率。</p>
+    <p><span class="tag">【结果】</span>实现20秒完成300+query召回情况判别，相比人工效率提升约500倍，沉淀为可复用skill，被团队持续复用，加速评估-优化闭环节奏。</p>
   </div>
 
-  <div class="module-title">模块二：MCP引入流程SOP</div>
+  <div class="module-title">模块二：MCP未召回归因拆解及策略协同优化</div>
   <div class="content-block">
-    <p><span class="tag">【背景】</span>MCP从引入到上线涉及生态、助手、垂类业务方、策略等多团队协作，此前无标准化规范。本人经历购药MCP等多个MCP从0到1的完整引入，将流程沉淀为SOP。</p>
-    <p><span class="tag">【上线与下线标准】</span>上线侧：准确率≥90%方可审批，最低信心样本单MCP 50 query、看板级100 query。下线侧：在线准确率&lt;80%触发强制回滚；80%-90%限期1周优化，未达标则回滚；紧急下线覆盖调用成功率过低、时延过高、风控及公关风险等情形。</p>
-    <p><span class="tag">【例行评估】</span>建立持续监控体系：上线1周内完成准确率+端到端体验回归，重点场景周评估，整体看板双周/月评估。制定准召打分（0-3分四档）与GSB评估标准（对比有/无MCP回答质量差异）。</p>
-    <p><span class="tag">【结果】</span>输出MCP全生命周期管理SOP，涵盖上线/下线标准、审核流程、例行评估机制，被后续引入工作持续复用。</p>
+    <p><span class="tag">【背景】</span>经过模块一的批量扫描发现哪些应召query未召回相应MCP后，需拆解这些bad case未召回具体原因，判断是工具调用链路的哪一个阶段出了问题。</p>
+    <p><span class="tag">【方案】</span>使用拆解能逐阶段拆解bad case的skill，定位问题出在planner、填参还是generator阶段。将归因结果在策略会上分发给对应算法同学，结合哪些MCP召回率下滑严重、pipeline哪一阶段问题占比最高等维度，共同确定重点优化方向。</p>
+    <p><span class="tag">【结果】</span>形成"批量扫描→逐条归因→日会分发→定向优化→再评估"的持续闭环，高效推动策略侧优化，实现MCP召回率与准确率提升。</p>
   </div>
 
   <div class="module-title">模块三：反转实验</div>
   <div class="content-block">
     <p><span class="tag">【背景】</span>通过A/B实验量化MCP对用户体验的实际影响，为MCP保留/优化/下线提供数据依据。</p>
-    <p><span class="tag">【第一轮实验】</span>5%流量反转关闭全部在线MCP，净化分析将MCP分为三类：正向6个、无增益47个、负向17个。发现时延指标异常：关闭MCP理论应降低首token延迟约400ms，实测仅30ms。排查定位：反转开关置于Reader层，前序Pipeline（MCPRank、Planner、McpSkills）仍在运行，导致时延测量失真约13倍。</p>
-    <p><span class="tag">【第二轮优化】</span>设计双组实验：①Reader层开关（支持单MCP净化，衡量效果贡献）；②管线最前端开关（完全禁止MCP调用，捕捉全链路时延成本）。两个维度结合实现真实ROI判断。</p>
-    <p><span class="tag">【结果】</span>百度健康等6个MCP被验证为正向增益；发现并修正实验设计缺陷，推动双组方案落地。</p>
+    <p><span class="tag">【第一轮实验】</span>5%流量反转关闭全部在线MCP，净化分析将MCP分为三类：正向12个、无增益47个、负向8个。发现时延指标异常：关闭MCP理论应降低首token延迟约400ms，实测仅30ms。排查定位：反转开关置于Reader层，前序Pipeline（MCPRank、Planner、McpSkills）仍在运行，导致时延测量失真约13倍。</p>
+    <p><span class="tag">【第二轮实验】</span>设计双组实验：①Reader层开关（支持单MCP净化，衡量效果贡献）；②管线最前端开关（完全禁止MCP调用，捕捉全链路时延成本）。两个维度结合实现真实ROI判断。</p>
   </div>
 </div>
 
